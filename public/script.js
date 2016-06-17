@@ -2,10 +2,7 @@ $(document).ready(function(){
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
 
    var queryString = location.search;
-   if (queryString.indexOf("+") === -1){
    var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
-   }
-   else{ var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("+"));}
 
   function createVideoCase(results){
     for (var searchdata in results){
@@ -33,12 +30,25 @@ $(document).ready(function(){
     for (var game in searchresults){
       var gamebox = document.createElement("div");
       var gameimg = document.createElement("img");
+      var gameimgdiv = document.createElement("div");
+      gameimgdiv.className = "gameimgdiv";
       var gamename = document.createElement("div");
+      var gameplatforms = document.createElement("div");
+      gameplatforms.className = "gameplatforms";
+      for (var num in searchresults[game].platforms) {
+        if (num !== "1"){
+        var gameplatform = " / " + searchresults[game].platforms[num];
+        }
+        else { var gameplatform = searchresults[game].platforms[num]; }
+        gameplatforms.innerHTML += gameplatform;
+      }
       gamebox.className = "gamebox";
       gameimg.src = searchresults[game].img;
+      gameimgdiv.appendChild(gameimg);
       gamename.innerHTML = searchresults[game].name;
-      gamebox.appendChild(gameimg);
+      gamebox.appendChild(gameimgdiv);
       gamebox.appendChild(gamename);
+      gamebox.appendChild(gameplatforms);
       $('#vidiv').append(gamebox);
     }
   }
@@ -65,19 +75,20 @@ $(document).ready(function(){
 
 $(window).on("load", function(){
   $.ajax({
-    url: "http://api.giantbomb.com/search?query=" + gamesearchquery + "&resources=game&api_key=75845dec33173c0ee810df3d3984e10cd4596231&format=jsonp&json_callback=myCallback",
-    dataType: "jsonp",
-    jsonpCallback: 'myCallback',
-    success: function myCallback (resultdata){
+    url: "https://videogamesrating.p.mashape.com/get.php?count=20&game=" + gamesearchquery,
+    headers: {
+      'X-Mashape-Key': 'B7yQCdljWYmshGmHE31bczbw9O58p1qDbyXjsncphjvoxN87Pt',
+      "Accept": "application/json"
+   },
+    success: function(resultdata){
       console.log(resultdata)
       var searchresults = [];
-      for (var game in resultdata.results){
-        if (resultdata.results[game].aliases !== null){
+      for (var game in resultdata){
         searchresults.push({
-          name: resultdata.results[game].aliases,
-          img: resultdata.results[game].image.small_url
+          name: resultdata[game].title,
+          img: resultdata[game].thumb,
+          platforms: resultdata[game].platforms
         });
-        }
       }
       loadGameResults(searchresults);
     }
