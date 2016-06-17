@@ -44,6 +44,8 @@ $(document).ready(function(){
       }
       gamebox.className = "gamebox";
       gameimg.src = searchresults[game].img;
+      gameimg.alt = searchresults[game].name;
+      gameimg.className = "gameimg";
       gameimgdiv.appendChild(gameimg);
       gamename.innerHTML = searchresults[game].name;
       gamebox.appendChild(gameimgdiv);
@@ -81,7 +83,6 @@ $(window).on("load", function(){
       "Accept": "application/json"
    },
     success: function(resultdata){
-      console.log(resultdata)
       var searchresults = [];
       for (var game in resultdata){
         searchresults.push({
@@ -95,13 +96,36 @@ $(window).on("load", function(){
   });
 });
 
+$('#navbutton').on("click", function(){
+  var newsearch = $('#navsearch').val();
+  gamesearchquery = newsearch;
+  $('#vidiv').empty();
+  $.ajax({
+    url: "https://videogamesrating.p.mashape.com/get.php?count=20&game=" + gamesearchquery,
+    headers: {
+      'X-Mashape-Key': 'B7yQCdljWYmshGmHE31bczbw9O58p1qDbyXjsncphjvoxN87Pt',
+      "Accept": "application/json"
+   },
+    success: function(resultdata){
+      var searchresults = [];
+      for (var game in resultdata){
+        searchresults.push({
+          name: resultdata[game].title,
+          img: resultdata[game].thumb,
+          platforms: resultdata[game].platforms
+        });
+      }
+      loadGameResults(searchresults);
+    }
+  });
+});
 
-  $('#navbutton').on("click", function(){
+  $(document).on("click", ".gameimg", function(){
     $('#vidiv').empty();
-    var gamename = $('#navsearch').val();
+    var gamesearch = $(this).attr("alt");
   $.ajax({
     method: "GET",
-    url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=rating&q=" + gamename + "%20playthrough&maxResults=9&key=" + key,
+    url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=rating&q=" + gamesearch + "%20gameplay&maxResults=9&key=" + key,
     success: function(data){
       var results = [];
       for (var result in data.items){
