@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/8bit-wonder" type="text/css"/>
     <link rel="stylesheet" href="foundation-6.2.3-essential/css/foundation.css">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -12,8 +13,36 @@
       <input type="button" id="navbutton"name="name" value="search">
     </nav>
     <main>
+      <nav id="nav">
+        <div id="comm">
+        <p>show</p>
+        <select class="commentary">
+          <option value="" selected>all videos</option>
+          <option value="with%20commentary">videos with commentary</option>
+          <option value="no%20commentary">videos with no commentary</option>
+        </select>
+        </div>
+        <div id="lan">
+        <p>language</p>
+        <select class="language">
+          <option value="" selected>English</option>
+          <option value="%20espa%F1ol">Spanish</option>
+          <option value="%20portugues">Portuguese</option>
+        </select>
+        </div>
+      </nav>
       <div id="vidiv"></div>
       <side id="side">
+        <div id="sidetitle"><h3>Top Ranked Gaming Channels</h3></div>
+        <div id="ranked">
+          <div id="rankbar"><p id="playerIdbar">Channel</p></div>
+          <div class="player"><p class="playerId">SSohPKC</p></div>
+          <div class="player"><p class="playerId">RabidRetrospectGames</p></div>
+          <div class="player"><p class="playerId">UberHaxorNova</p></div>
+          <div class="player"><p class="playerId">Cryaotic</p></div>
+          <div class="player"><p class="playerId">--</p></div>
+          <div class="player"><p class="playerId">--</p></div>
+        </div>
       </side>
     </main>
     <script src="https://use.fontawesome.com/f0b959cd5c.js"></script>

@@ -3,29 +3,26 @@ $(document).ready(function(){
 
    var queryString = location.search;
    var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
+   $('#nav').hide();
 
   function createVideoCase(results){
     for (var searchdata in results){
       var videocase = document.createElement("div");
       var mediacase =  document.createElement("iframe");
       var description = document.createElement("div");
-      var videotitle = document.createElement("p");
       var videoautor = document.createElement("p");
       description.className = "description";
-      videotitle.innerHTML = results[searchdata].title;
-      videotitle.style.fontWeight = "bold";
       videoautor.innerHTML =  '<i class="fa fa-youtube-play" aria-hidden="true"></i>' + ' ' + results[searchdata].autor;
       mediacase.className = "videoplayer";
-      mediacase.src = "https://www.youtube.com/embed/" + results[searchdata].id;
+      mediacase.src = "https://www.youtube.com/embed/videoseries?list=" + results[searchdata].id;
+      mediacase.setAttribute('allowFullScreen', '');
       videocase.className = "videocase";
       videocase.appendChild(mediacase);
-      description.appendChild(videotitle);
       description.appendChild(videoautor);
       videocase.appendChild(description);
       $('#vidiv').append(videocase);
     }
   }
-
   function loadGameResults(searchresults){
     for (var game in searchresults){
       var gamebox = document.createElement("div");
@@ -119,18 +116,22 @@ $('#navbutton').on("click", function(){
     }
   });
 });
+// "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video,playlist&videoDefinition=high&relevanceLanguage=en&order=rating&q=" + gamesearch + "%20gameplay&maxResults=9&key=" + key,
+var gamesearch;
 
   $(document).on("click", ".gameimg", function(){
+    $('#nav').show();
     $('#vidiv').empty();
-    var gamesearch = $(this).attr("alt");
+    gamesearch = $(this).attr("alt");
   $.ajax({
     method: "GET",
-    url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&order=rating&q=" + gamesearch + "%20gameplay&maxResults=9&key=" + key,
+    url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + gamesearch + "%20gameplay&maxResults=9&key=" + key,
     success: function(data){
       var results = [];
       for (var result in data.items){
         results.push({
-          id: data.items[result].id.videoId.replace('"',''),
+        //  id: data.items[result].id.videoId.replace('"',''),
+          id: data.items[result].id.playlistId.replace('"',''),
           autor: data.items[result].snippet.channelTitle,
           title: data.items[result].snippet.title
         });
@@ -140,4 +141,32 @@ $('#navbutton').on("click", function(){
   })
   });
 
+
+function filterSelect(){
+  var xquery = $(".commentary :selected").val();
+  var lang = $(".language :selected").val();
+  $('#vidiv').empty();
+  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + xquery + gamesearch + "%20gameplay"+ lang +"&maxResults=9&key=" + key;
+$.ajax({
+  method: "GET",
+  url: link,
+  success: function(data){
+
+    console.log(link)
+    var results = [];
+    for (var result in data.items){
+      results.push({
+        //id: data.items[result].id.videoId.replace('"',''),
+        id: data.items[result].id.playlistId.replace('"',''),
+        autor: data.items[result].snippet.channelTitle,
+        title: data.items[result].snippet.title
+      });
+    };
+    createVideoCase(results);
+  }
+})
+}
+
+$( ".commentary" ).change(filterSelect);
+$( ".language" ).change(filterSelect);
 });
