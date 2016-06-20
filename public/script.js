@@ -5,10 +5,17 @@ $(document).ready(function(){
    var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
    $('#nav').hide();
 
-   function createStarRating(){
+   function createStarRating(channelname){
      var span = document.createElement("span");
      span.className = "rating";
      var form = document.createElement("form");
+     form.className = "subform";
+     var ichannel = document.createElement("input");
+     ichannel.name = "channel";
+     ichannel.type = "text";
+     ichannel.value = channelname;
+     ichannel.style.display = "none";
+     form.appendChild(ichannel);
      for (var i = 5; i > 0; i--) {
        i = String(i);
        var inp = document.createElement("input");
@@ -27,8 +34,20 @@ $(document).ready(function(){
      return form;
    }
 
-$(document).on("click", '.rating-input', function(){
-  console.log(this.value)
+$(document).on("click", '.rating-input', function(e){
+   e.preventDefault();
+   var formData = {
+            'channel' : $('input[name=channel]').val(),
+            'score': this.value
+        };
+  $.ajax({
+    url: "https://script.google.com/macros/s/AKfycbwb8z8RmuV1yBCg1L741NpO0QeIM2awDJ3ISb-9-oQCIHwOmYrQ/exec",
+    data: formData,
+    method: "POST",
+    success: function(data){
+      console.log(data);
+    }
+  })
 });
 
   function createVideoCase(results){
@@ -37,12 +56,13 @@ $(document).on("click", '.rating-input', function(){
       var mediacase =  document.createElement("iframe");
       var description = document.createElement("div");
       var videoautor = document.createElement("p");
+      var channelname = results[searchdata].autor;
       var score = document.createElement("div");
       var rating = document.createElement("div");
       var rate = document.createElement("button");
       rate.value = "rate";
       rating.className = "rating";
-      rating.appendChild(createStarRating());
+      rating.appendChild(createStarRating(channelname));
       rate.className = "ratenow";
       score.innerHTML = "score: ";
       description.className = "description";
