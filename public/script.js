@@ -46,7 +46,7 @@ $(document).ready(function(){
       var score = document.createElement("div");
       var rating = document.createElement("div");
       var rate = document.createElement("button");
-      rating.className = "rating";
+      rating.className = "ratingcase";
       rate.className = "ratenow";
       score.innerHTML = "score: ";
       score.className = "score";
@@ -74,7 +74,7 @@ $(document).ready(function(){
     var channelnametag = $(this).parent().parent().children(".videoautor").html();
     var channelname =  channelnametag.substring(channelnametag.lastIndexOf(">")+1, channelnametag.length);
     console.log(channelname)
-  $(this).parent().parent().children(".rating").append(createStarRating(channelname))
+  $(this).parent().parent().children(".ratingcase").append(createStarRating(channelname))
   });
 
   function loadGameResults(searchresults){
@@ -107,7 +107,7 @@ $(document).ready(function(){
   }
   $(document).on("click", '.ratenow', function(){
     $(this).parent().hide();
-    $(this).parent().parent().children('.rating').show();
+    $(this).parent().parent().children('.ratingcase').show();
 
   });
 
@@ -176,7 +176,6 @@ $('#navbutton').on("click", function(){
     }
   });
 });
-// "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video,playlist&videoDefinition=high&relevanceLanguage=en&order=rating&q=" + gamesearch + "%20gameplay&maxResults=9&key=" + key,
 var gamesearch;
 
   $(document).on("click", ".gameimg", function(){
@@ -208,13 +207,16 @@ var gamesearch;
               'score': this.value
           };
     $.ajax({
-      url: "https://script.google.com/macros/s/AKfycbwb8z8RmuV1yBCg1L741NpO0QeIM2awDJ3ISb-9-oQCIHwOmYrQ/exec",
+      url: "https://script.google.com/macros/s/AKfycby9Dgh3JyoCaWSZnqO1tSmqYjnSijF5j6D-xin0yvnA4OgZFyg/exec",
       data: formData,
       method: "POST",
       success: function(data){
         alert("sent");
+        console.log(data)
       }
     })
+    $(this).parent().parent().parent().children(".score").show();
+    $(this).parent().parent().remove();
   });
 
 function filterSelect(){
@@ -227,7 +229,6 @@ $.ajax({
   url: link,
   success: function(data){
 
-    console.log(link)
     var results = [];
     for (var result in data.items){
       results.push({
