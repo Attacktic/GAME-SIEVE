@@ -13,8 +13,9 @@ $(document).ready(function(){
      var ichannel = document.createElement("input");
      ichannel.name = "channel";
      ichannel.type = "text";
-     ichannel.value = channelname;
      ichannel.style.display = "none";
+     ichannel.id = channelname;
+     ichannel.value = channelname;
      form.appendChild(ichannel);
      for (var i = 5; i > 0; i--) {
        i = String(i);
@@ -34,21 +35,6 @@ $(document).ready(function(){
      return form;
    }
 
-$(document).on("click", '.rating-input', function(e){
-   e.preventDefault();
-   var formData = {
-            'channel' : $('input[name=channel]').val(),
-            'score': this.value
-        };
-  $.ajax({
-    url: "https://script.google.com/macros/s/AKfycbwb8z8RmuV1yBCg1L741NpO0QeIM2awDJ3ISb-9-oQCIHwOmYrQ/exec",
-    data: formData,
-    method: "POST",
-    success: function(data){
-      console.log(data);
-    }
-  })
-});
 
   function createVideoCase(results){
     for (var searchdata in results){
@@ -60,13 +46,13 @@ $(document).on("click", '.rating-input', function(e){
       var score = document.createElement("div");
       var rating = document.createElement("div");
       var rate = document.createElement("button");
-      rate.value = "rate";
       rating.className = "rating";
-      rating.appendChild(createStarRating(channelname));
       rate.className = "ratenow";
       score.innerHTML = "score: ";
+      score.className = "score";
       description.className = "description";
       videoautor.innerHTML =  '<i class="fa fa-youtube-play" aria-hidden="true"></i>' + ' ' + results[searchdata].autor;
+      videoautor.className = "videoautor";
       mediacase.className = "videoplayer";
       mediacase.src = "https://www.youtube.com/embed/videoseries?list=" + results[searchdata].id;
       mediacase.setAttribute('allowFullScreen', '');
@@ -81,6 +67,16 @@ $(document).on("click", '.rating-input', function(e){
       $('#vidiv').append(videocase);
     }
   }
+
+  //create rating on click of .ratenow
+
+  $(document).on("click", ".ratenow", function(){
+    var channelnametag = $(this).parent().parent().children(".videoautor").html();
+    var channelname =  channelnametag.substring(channelnametag.lastIndexOf(">")+1, channelnametag.length);
+    console.log(channelname)
+  $(this).parent().parent().children(".rating").append(createStarRating(channelname))
+  });
+
   function loadGameResults(searchresults){
     for (var game in searchresults){
       var gamebox = document.createElement("div");
@@ -205,6 +201,21 @@ var gamesearch;
   })
   });
 
+  $(document).on("click", '.rating-input', function(e){
+     e.preventDefault();
+     var formData = {
+              'channel' : $(this).parent().children('input[name=channel]').val(),
+              'score': this.value
+          };
+    $.ajax({
+      url: "https://script.google.com/macros/s/AKfycbwb8z8RmuV1yBCg1L741NpO0QeIM2awDJ3ISb-9-oQCIHwOmYrQ/exec",
+      data: formData,
+      method: "POST",
+      success: function(data){
+        alert("sent");
+      }
+    })
+  });
 
 function filterSelect(){
   var xquery = $(".commentary :selected").val();
