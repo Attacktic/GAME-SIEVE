@@ -5,12 +5,46 @@ $(document).ready(function(){
    var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
    $('#nav').hide();
 
+   function createStarRating(){
+     var span = document.createElement("span");
+     span.className = "rating";
+     var form = document.createElement("form");
+     for (var i = 5; i > 0; i--) {
+       i = String(i);
+       var inp = document.createElement("input");
+       var lab = document.createElement("label");
+       inp.className = "rating-input";
+       inp.id = "rating-input-1-" + i;
+       inp.name = "rating-input-1";
+       inp.type = "radio";
+       inp.value = i;
+       lab.setAttribute("for", "rating-input-1-" + i);
+       lab.className = "rating-star";
+       form.appendChild(inp);
+       form.appendChild(lab);
+       span.appendChild(form);
+     }
+     return form;
+   }
+
+$(document).on("click", '.rating-input', function(){
+  console.log(this.value)
+});
+
   function createVideoCase(results){
     for (var searchdata in results){
       var videocase = document.createElement("div");
       var mediacase =  document.createElement("iframe");
       var description = document.createElement("div");
       var videoautor = document.createElement("p");
+      var score = document.createElement("div");
+      var rating = document.createElement("div");
+      var rate = document.createElement("button");
+      rate.value = "rate";
+      rating.className = "rating";
+      rating.appendChild(createStarRating());
+      rate.className = "ratenow";
+      score.innerHTML = "score: ";
       description.className = "description";
       videoautor.innerHTML =  '<i class="fa fa-youtube-play" aria-hidden="true"></i>' + ' ' + results[searchdata].autor;
       mediacase.className = "videoplayer";
@@ -19,6 +53,10 @@ $(document).ready(function(){
       videocase.className = "videocase";
       videocase.appendChild(mediacase);
       description.appendChild(videoautor);
+      score.appendChild(rate);
+      description.appendChild(score);
+      description.appendChild(rating);
+      $(rating).hide();
       videocase.appendChild(description);
       $('#vidiv').append(videocase);
     }
@@ -51,6 +89,11 @@ $(document).ready(function(){
       $('#vidiv').append(gamebox);
     }
   }
+  $(document).on("click", '.ratenow', function(){
+    $(this).parent().hide();
+    $(this).parent().parent().children('.rating').show();
+
+  });
 
   var tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
@@ -94,6 +137,7 @@ $(window).on("load", function(){
 });
 
 $('#navbutton').on("click", function(){
+  $('#nav').hide();
   var newsearch = $('#navsearch').val();
   gamesearchquery = newsearch;
   $('#vidiv').empty();
@@ -169,4 +213,6 @@ $.ajax({
 
 $( ".commentary" ).change(filterSelect);
 $( ".language" ).change(filterSelect);
+
+var scores = [{channel: "UberHaxorNova", score: 3.6},{channel: "SSoHPKC", score: 5},{channel: "RabidRetrospectGames", score: 4},{channel: "Cryaotic", score: 3}]
 });
