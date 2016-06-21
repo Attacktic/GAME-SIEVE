@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+@font-face { font-family: '04B03';
+src:  url('04B03.TTF')}
 
 body {
   margin: 0;
@@ -305,24 +307,29 @@ footer{
   display: block;
 }
 .description p{
+  font-weight: bold;
   width: 50%;
   height: 100%;
   display: inline-block;
 }
 
 .description div{
-  width: 38%;
+  width: 50%;
   height: 100%;
   display: inline-block;
   float: right;
+  text-align: right;
 }
 
 .description button{
-  width: 8%;
-  height: 100%;
-  background-color: blue;
+  margin-left: 1vw;
+  width: 24%;
+  height: 80%;
+  border: 1px solid white;
   display: inline-block;
   float: right;
+  font-size: 0.4em;
+  font-family: "04B03";
 }
 
 .rating {

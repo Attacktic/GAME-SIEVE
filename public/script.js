@@ -1,5 +1,6 @@
 $(document).ready(function(){
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
+  var scores = {"UberHaxorNova": [3.5,1],"SSoHPKC": [5,1],"RabidRetrospectGames": [4,1],"Cryaotic": [3,1]};
 
    var queryString = location.search;
    var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
@@ -48,7 +49,8 @@ $(document).ready(function(){
       var rate = document.createElement("button");
       rating.className = "ratingcase";
       rate.className = "ratenow";
-      score.innerHTML = "score: ";
+      rate.innerHTML = "RATE";
+      score.innerHTML = "score: " + results[searchdata].score;
       score.className = "score";
       description.className = "description";
       videoautor.innerHTML =  '<i class="fa fa-youtube-play" aria-hidden="true"></i>' + ' ' + results[searchdata].autor;
@@ -108,7 +110,7 @@ $(document).ready(function(){
   $(document).on("click", '.ratenow', function(){
     $(this).parent().hide();
     $(this).parent().parent().children('.ratingcase').show();
-
+    $(this).remove();
   });
 
   var tag = document.createElement("script");
@@ -188,11 +190,17 @@ var gamesearch;
     success: function(data){
       var results = [];
       for (var result in data.items){
+        if(scores[data.items[result].snippet.channelTitle] !== undefined){
+        var scoreValue = scores[data.items[result].snippet.channelTitle][0];}
+        else{
+          scoreValue = "not rated";
+        }
         results.push({
         //  id: data.items[result].id.videoId.replace('"',''),
           id: data.items[result].id.playlistId.replace('"',''),
           autor: data.items[result].snippet.channelTitle,
-          title: data.items[result].snippet.title
+          title: data.items[result].snippet.title,
+          score: scoreValue
         });
       };
       createVideoCase(results);
@@ -216,6 +224,10 @@ var gamesearch;
       }
     })
     $(this).parent().parent().parent().children(".score").show();
+  /*  if ($(this).parent().parent().parent().children(".score").text() == "score: not rated"){
+      $(this).parent().parent().parent().children(".score").text("score: " + this.value)
+    }
+    else { $(this).parent().parent().parent().children(".score").text("score: " + (scores[formData.channel][0] + this.value)/scores[formData.channel][1]+1)}*/
     $(this).parent().parent().remove();
   });
 
@@ -246,5 +258,4 @@ $.ajax({
 $( ".commentary" ).change(filterSelect);
 $( ".language" ).change(filterSelect);
 
-var scores = [{channel: "UberHaxorNova", score: 3.6},{channel: "SSoHPKC", score: 5},{channel: "RabidRetrospectGames", score: 4},{channel: "Cryaotic", score: 3}]
 });
