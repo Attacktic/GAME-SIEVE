@@ -360,36 +360,36 @@ footer{
 }
 
 
-.commentary dt{
+.commentary dt, .language dt{
   margin: 0px;
   padding: 0px;
 }
 
-.commentary ul{
+.commentary ul, .language ul{
   margin: 0px;
   padding: 0px;
 }
 
-.commentary dd {
+.commentary dd, .language dd{
   position:relative;
   margin: 0;
   padding: 0;
 }
 
-#dropdownc {
+.dropdownc {
   background: #e4dfcb url(arrow.png) no-repeat scroll right center;
   display: block;
   padding-right: 20px;
   border: 1px solid #d4ca9a;
   width: 150px;
 }
-.commentary dt a span {
+.commentary dt a span, .language dt a span{
   cursor: pointer;
   display: block;
   padding: 5px;
 }
 
-#commentarylist {
+#commentarylist, #languagelist {
   background: #e4dfcb none repeat scroll 0 0;
   display: none;
   list-style: none;
@@ -400,14 +400,10 @@ footer{
   width: auto;
   min-width: 170px;
 }
-.commentary span.value {
+.commentary span.value, .language span.value{
   display: none;
 }
-#commentarylist li a {
+#commentarylist li a, #languagelist li a{
   padding: 5px;
   display: block;
-}
-
-.commentary span.value {
-  display: none;
 }

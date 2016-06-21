@@ -239,7 +239,6 @@ var gamesearch;
       method: "POST",
       success: function(data){
         alert("sent");
-        console.log(data)
       }
     })
     $(this).parent().parent().parent().children(".score").show();
@@ -252,15 +251,13 @@ var gamesearch;
 
 function filterSelect(){
   var xquery = $("#selectval").html();
-  var lang = "en";
+  var lang = $("#selectval2").html();
   $('#vidiv').empty();
-  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + xquery + gamesearch + "%20gameplay" +"&maxResults=9&key=" + key;
-  console.log(link)
+  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + xquery + gamesearch + "%20gameplay" + lang +"&maxResults=9&key=" + key;
 $.ajax({
   method: "GET",
   url: link,
   success: function(data){
-    console.log(data)
     var results = [];
     for (var result in data.items){
       results.push({
@@ -279,12 +276,15 @@ $(".commentary dd ul li a").click(function() {
     $(".commentary dt a span").html(text);
     $("#commentarylist").hide();
 });
-$(document).on("click", ".commentarya", filterSelect)
 
-$( ".language" ).change(filterSelect);
+$(document).on("click", ".commentarya", filterSelect);
 
 $(".commentary dt a").click(function() {
     $("#commentarylist").toggle();
+});
+
+$(".language dt a").click(function() {
+    $("#languagelist").toggle();
 });
 
 $(".commentary dd ul li a").click(function() {
@@ -296,10 +296,26 @@ $(".commentary dd ul li a").click(function() {
     $("#commentarylist").hide();
 });
 
+$(".language dd ul li a").click(function() {
+    $("#selectval2").hide();
+    var text = $(this).html();
+    var classvalue = this.lastChild.innerHTML;
+    $(".language dt a span").html(text);
+    $("#selectval2").html(classvalue);
+    $("#languagelist").hide();
+});
+
+
 $(document).bind('click', function(e) {
     var clicked = $(e.target);
     if (! clicked.parents().hasClass("commentary"))
         $("#commentarylist").hide();
+});
+
+$(document).bind('click', function(e) {
+    var clicked = $(e.target);
+    if (! clicked.parents().hasClass("language"))
+        $("#languagelist").hide();
 });
 
 var text = $(this).html();
