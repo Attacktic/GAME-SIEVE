@@ -358,3 +358,56 @@ footer{
 .rating-input:checked ~ .rating-star {
     background-position: 0 0;
 }
+
+
+.commentary dt{
+  margin: 0px;
+  padding: 0px;
+}
+
+.commentary ul{
+  margin: 0px;
+  padding: 0px;
+}
+
+.commentary dd {
+  position:relative;
+  margin: 0;
+  padding: 0;
+}
+
+#dropdownc {
+  background: #e4dfcb url(arrow.png) no-repeat scroll right center;
+  display: block;
+  padding-right: 20px;
+  border: 1px solid #d4ca9a;
+  width: 150px;
+}
+.commentary dt a span {
+  cursor: pointer;
+  display: block;
+  padding: 5px;
+}
+
+#commentarylist {
+  background: #e4dfcb none repeat scroll 0 0;
+  display: none;
+  list-style: none;
+  padding: 5px 0px;
+  position: absolute;
+  left: 0px;
+  top: 2px;
+  width: auto;
+  min-width: 170px;
+}
+.commentary span.value {
+  display: none;
+}
+#commentarylist li a {
+  padding: 5px;
+  display: block;
+}
+
+.commentary span.value {
+  display: none;
+}

@@ -251,15 +251,16 @@ var gamesearch;
   });
 
 function filterSelect(){
-  var xquery = $(".commentary :selected").val();
-  var lang = $(".language :selected").val();
+  var xquery = $("#selectval").html();
+  var lang = "en";
   $('#vidiv').empty();
-  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + xquery + gamesearch + "%20gameplay"+ lang +"&maxResults=9&key=" + key;
+  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + xquery + gamesearch + "%20gameplay" +"&maxResults=9&key=" + key;
+  console.log(link)
 $.ajax({
   method: "GET",
   url: link,
   success: function(data){
-
+    console.log(data)
     var results = [];
     for (var result in data.items){
       results.push({
@@ -273,8 +274,34 @@ $.ajax({
   }
 })
 }
+$(".commentary dd ul li a").click(function() {
+    var text = $(this).html();
+    $(".commentary dt a span").html(text);
+    $("#commentarylist").hide();
+});
+$(document).on("click", ".commentarya", filterSelect)
 
-$( ".commentary" ).change(filterSelect);
 $( ".language" ).change(filterSelect);
 
+$(".commentary dt a").click(function() {
+    $("#commentarylist").toggle();
+});
+
+$(".commentary dd ul li a").click(function() {
+    $("#selectval").hide();
+    var text = $(this).html();
+    var classvalue = this.lastChild.innerHTML;
+    $(".commentary dt a span").html(text);
+    $("#selectval").html(classvalue);
+    $("#commentarylist").hide();
+});
+
+$(document).bind('click', function(e) {
+    var clicked = $(e.target);
+    if (! clicked.parents().hasClass("commentary"))
+        $("#commentarylist").hide();
+});
+
+var text = $(this).html();
+$(".commentary dt a span").html(text);
 });

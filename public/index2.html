@@ -16,11 +16,21 @@
       <div id="nav">
         <div id="comm">
         <p>show</p>
-        <select class="commentary">
+        <dl class="commentary">
+            <dt><a id="dropdownc" href="#"><span>all videos</span><span id="selectval"></span></a></dt>
+            <dd>
+                <ul id="commentarylist">
+                    <li><a href="#" class="commentarya">all videos<span class="value"></span></a></li>
+                    <li><a href="#" class="commentarya">videos with commentary<span class="value">with%20commentary%20</span></a></li>
+                    <li><a href="#" class="commentarya">videos with no commentary<span class="value">no%20commentary%20</span></a></li>
+                </ul>
+            </dd>
+        </dl>
+        <!--select class="commentary">
           <option value="" selected>all videos</option>
           <option value="with%20commentary">videos with commentary</option>
           <option value="no%20commentary">videos with no commentary</option>
-        </select>
+        </select-->
         </div>
         <div id="lan">
         <p>language</p>
