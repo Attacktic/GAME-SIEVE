@@ -5,6 +5,8 @@ $(document).ready(function(){
    var queryString = location.search;
    var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
    $('#nav').hide();
+    var random = backgroundlistindex2[Math.floor(Math.random()*backgroundlistindex2.length)];
+    $("main").css("background-image", "url(" + random + ")");
 
    var temparr = Object.keys(scores);
    for (var i = 0; i < 5; i++) {
