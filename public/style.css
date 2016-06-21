@@ -217,27 +217,16 @@ select{
   display: inline-block;
 }
 
-#comm {
+#comm, #lan {
   font-size: 0.8em;
-  width: 20vw;
+  width: 32vw;
   height: 5vh;
   display: inline-block;
   float: left;
 }
 
-#comm p{
-  display: inline-block;
-}
-
-#lan p{
-  display: inline-block;
-}
-#lan{
-  font-size: 0.8em;
-  margin-right: 5vw;
-  float: left;
-  width: 22vw;
-  height: 5vh;
+#comm p, #lan p{
+  margin: 0;
   display: inline-block;
 }
 
@@ -353,13 +342,14 @@ footer{
     height: 16px;
     background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
 }
-.rating-star:hover,
-.rating-star:hover ~ .rating-star,
-.rating-input:checked ~ .rating-star {
+.rating-star:hover, .rating-star:hover ~ .rating-star, .rating-input:checked ~ .rating-star {
     background-position: 0 0;
 }
 
+.commentary, .language{
+  display: inline-block;
 
+}
 .commentary dt, .language dt{
   margin: 0px;
   padding: 0px;
@@ -377,11 +367,11 @@ footer{
 }
 
 .dropdownc {
-  background: #e4dfcb url(arrow.png) no-repeat scroll right center;
+  background-color: white;
   display: block;
-  padding-right: 20px;
-  border: 1px solid #d4ca9a;
-  width: 150px;
+  padding-right: 2vw;
+  width: 16vw;
+  height: 7vh;
 }
 .commentary dt a span, .language dt a span{
   cursor: pointer;
@@ -390,7 +380,7 @@ footer{
 }
 
 #commentarylist, #languagelist {
-  background: #e4dfcb none repeat scroll 0 0;
+  background-color: white;
   display: none;
   list-style: none;
   padding: 5px 0px;
@@ -405,5 +395,8 @@ footer{
 }
 #commentarylist li a, #languagelist li a{
   padding: 5px;
+  width: 16vw;
+  height: 7vh;
+  border-bottom: 1px solid black;
   display: block;
 }

@@ -260,11 +260,17 @@ $.ajax({
   success: function(data){
     var results = [];
     for (var result in data.items){
+      if(scores[data.items[result].snippet.channelTitle] !== undefined){
+      var scoreValue = scores[data.items[result].snippet.channelTitle][0];}
+      else{
+        scoreValue = "not rated";
+      }
       results.push({
         //id: data.items[result].id.videoId.replace('"',''),
         id: data.items[result].id.playlistId.replace('"',''),
         autor: data.items[result].snippet.channelTitle,
-        title: data.items[result].snippet.title
+        title: data.items[result].snippet.title,
+        score: scoreValue
       });
     };
     createVideoCase(results);
