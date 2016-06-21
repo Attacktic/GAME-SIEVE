@@ -314,7 +314,7 @@ footer{
 }
 
 .description div{
-  width: 50%;
+  width: 6vw;
   height: 100%;
   display: inline-block;
   float: right;
@@ -323,7 +323,7 @@ footer{
 
 .description button{
   margin-left: 1vw;
-  width: 24%;
+  width: 2vw;
   height: 80%;
   border: 1px solid white;
   display: inline-block;
