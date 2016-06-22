@@ -1,3 +1,29 @@
+var tag = document.createElement("script");
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player;
+
+function onYoutubeIframeAPIReady(){
+  player = new YT.Player("videoplayer", {
+    events: {
+      'onReady' : onPlayerReady,
+      'onStateChange' : onPlayerStateChange
+    }
+  });
+}
+
+function onPlayerReady(e){
+  e.target.playVideo();
+}
+
+function onPlayerStateChange(e){}
+
+function getCurrentTime() {
+  player.getCurrentTime();
+}
+
 $(document).ready(function(){
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
   var scores = {"SSoHPKC": [5,1],"RabidRetrospectGames": [4,1], "UberHaxorNova": [3.5,1], "Cryaotic": [3,1]};
@@ -68,6 +94,14 @@ $(document).ready(function(){
       var rating = document.createElement("div");
       var rate = document.createElement("button");
       var expand = document.createElement("span");
+      var next = document.createElement("span");
+      var prev = document.createElement("span");
+      prev.className = "prev";
+      prev.title = "Previous video";
+      prev.innerHTML ='<i class="fa fa-step-backward" aria-hidden="true"></i>';
+      next.className = "next";
+      next.title = "Next video";
+      next.innerHTML ='<i class="fa fa-step-forward" aria-hidden="true"></i>';
       expand.className = "expand";
       expand.title = "Theater mode";
       expand.innerHTML ='<i class="fa fa-expand" aria-hidden="true"></i>';
@@ -80,8 +114,9 @@ $(document).ready(function(){
       videoautor.innerHTML =  '<i class="fa fa-youtube-play" aria-hidden="true"></i>' + ' ' + results[searchdata].autor;
       videoautor.className = "videoautor";
       mediacase.className = "videoplayer";
-      mediacase.src = "https://www.youtube.com/embed/videoseries?list=" + results[searchdata].id;
+      mediacase.src = "https://www.youtube.com/embed/videoseries?" + "enablejsapi=1&version=3" + "&list=" + results[searchdata].id;
       mediacase.setAttribute('allowFullScreen', '');
+      mediacase.setAttribute('allowscriptaccess', 'always');
       videocase.className = "videocase";
       videocase.appendChild(mediacase);
       description.appendChild(videoautor);
@@ -89,40 +124,59 @@ $(document).ready(function(){
       description.appendChild(score);
       description.appendChild(rating);
       description.appendChild(expand);
+      description.appendChild(next);
+      description.appendChild(prev);
       $(rating).hide();
       videocase.appendChild(description);
       $('#vidiv').append(videocase);
     }
   }
-$(document).on("click", ".expand", function(){
-  var thisvideoId =  this.parentNode.parentNode.firstChild.src;
+$(document).on("click", ".expand", function(e){
+  e.preventDefault()
+  this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+  //var currenttime2 =  this.parentNode.parentNode.firstChild.getCurrentTime();
+  //console.log(this.parentNode.parentNode.firstChild.contentWindow.getCurrentTime())
+  var thisvideoId = this.parentNode.parentNode.firstChild.src;
   var popup = document.createElement("div");
   var close = document.createElement("div");
   var videoplayerpop = document.createElement("iframe");
   videoplayerpop.className = "theaterplayer";
-  videoplayerpop.src = thisvideoId;
+  videoplayerpop.src = thisvideoId + "&start=1868&autoplay=1";
   videoplayerpop.setAttribute('allowFullScreen', '');
   close.className = "close";
   close.innerHTML='<i class="fa fa-times" aria-hidden="true"></i>';
   popup.id = "popup";
   popup.appendChild(close);
-  popup.appendChild(videoplayerpop)
+  popup.appendChild(videoplayerpop);
   var body = document.getElementsByTagName('body')[0];
   body.insertBefore(popup, body.childNodes[0]);
 });
 
-$(document).on("click", ".close", function(){
+$(document).on("click", ".next", function(e){
+  e.preventDefault();
+  this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'nextVideo' + '","args":""}', '*');
+});
+
+$(document).on("click", ".prev", function(e){
+  e.preventDefault();
+  this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'previousVideo' + '","args":""}', '*');
+});
+
+$(document).on("click", ".close", function(e){
+  e.preventDefault();
   $(this).parent().remove();
 });
 
-  $(document).on("click", ".ratenow", function(){
+  $(document).on("click", ".ratenow", function(e){
+    e.preventDefault()
     var channelnametag = $(this).parent().parent().children(".videoautor").html();
     var channelname =  channelnametag.substring(channelnametag.lastIndexOf(">")+1, channelnametag.length);
-    console.log(channelname)
-  $(this).parent().parent().children(".ratingcase").append(createStarRating(channelname))
+    console.log(channelname);
+  $(this).parent().parent().children(".ratingcase").append(createStarRating(channelname));
   });
 
   function loadGameResults(searchresults){
+    $('#loading').hide();
     for (var game in searchresults){
       var gamebox = document.createElement("div");
       var gameimg = document.createElement("img");
@@ -150,31 +204,12 @@ $(document).on("click", ".close", function(){
       $('#vidiv').append(gamebox);
     }
   }
-  $(document).on("click", '.ratenow', function(){
+  $(document).on("click", '.ratenow', function(e){
+    e.preventDefault()
     $(this).parent().hide();
     $(this).parent().parent().children('.ratingcase').show();
     $(this).remove();
   });
-
-  var tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-  var player;
-
-  function onYoutubeIframeAPIReady(){
-    player = new YT.Player("videoplayer", {
-      events: {
-        'onReady' : onPlayerReady,
-        'onStateChange' : onPlayerStateChange
-      }
-    })
-  }
-
-  function onPlayerReady(e){e.target.playVideo();}
-
-  function onPlayerStateChange(e){}
 
 $(window).on("load", function(){
   $.ajax({
@@ -197,7 +232,8 @@ $(window).on("load", function(){
   });
 });
 
-$('#navbutton').on("click", function(){
+$('#navbutton').on("click", function(e){
+  e.preventDefault()
   $('#nav').hide();
   var newsearch = $('#navsearch').val();
   gamesearchquery = newsearch;
@@ -223,7 +259,8 @@ $('#navbutton').on("click", function(){
 });
 var gamesearch;
 
-  $(document).on("click", ".gameimg", function(){
+  $(document).on("click", ".gameimg", function(e){
+    e.preventDefault()
     $('#nav').show();
     $('#vidiv').empty();
     gamesearch = $(this).attr("alt");
@@ -245,10 +282,10 @@ var gamesearch;
           title: data.items[result].snippet.title,
           score: scoreValue
         });
-      };
+      }
       createVideoCase(results);
     }
-  })
+  });
   });
 
   $(document).on("click", '.rating-input', function(e){
@@ -265,12 +302,12 @@ var gamesearch;
       success: function(data){
         alert("sent");
       }
-    })
+    });
     $(this).parent().parent().parent().children(".score").show();
     if ($(this).parent().parent().parent().children(".score").text() == "score: not rated"){
-      $(this).parent().parent().parent().children(".score").text("score: " + this.value)
+      $(this).parent().parent().parent().children(".score").text("score: " + this.value);
     }
-    else { $(this).parent().parent().parent().children(".score").text("score: " + (scores[formData.channel][0] + this.value)/scores[formData.channel][1]+1)}
+    else { $(this).parent().parent().parent().children(".score").text("score: " + (scores[formData.channel][0] + this.value)/scores[formData.channel][1]+1);}
     $(this).parent().parent().remove();
   });
 
@@ -297,12 +334,13 @@ $.ajax({
         title: data.items[result].snippet.title,
         score: scoreValue
       });
-    };
+    }
     createVideoCase(results);
   }
-})
+});
 }
-$(".commentary dd ul li a").click(function() {
+$(".commentary dd ul li a").click(function(e) {
+    e.preventDefault()
     var text = $(this).html();
     $(".commentary dt a span").html(text);
     $("#commentarylist").hide();
@@ -310,15 +348,18 @@ $(".commentary dd ul li a").click(function() {
 
 $(document).on("click", ".commentarya", filterSelect);
 
-$(".commentary dt a").click(function() {
+$(".commentary dt a").click(function(e) {
+    e.preventDefault()
     $("#commentarylist").toggle();
 });
 
-$(".language dt a").click(function() {
+$(".language dt a").click(function(e) {
+    e.preventDefault()
     $("#languagelist").toggle();
 });
 
-$(".commentary dd ul li a").click(function() {
+$(".commentary dd ul li a").click(function(e) {
+    e.preventDefault()
     $("#selectval").hide();
     var text = $(this).html();
     var classvalue = this.lastChild.innerHTML;
@@ -327,7 +368,8 @@ $(".commentary dd ul li a").click(function() {
     $("#commentarylist").hide();
 });
 
-$(".language dd ul li a").click(function() {
+$(".language dd ul li a").click(function(e) {
+    e.preventDefault()
     $("#selectval2").hide();
     var text = $(this).html();
     var classvalue = this.lastChild.innerHTML;
@@ -344,6 +386,7 @@ $(document).bind('click', function(e) {
 });
 
 $(document).bind('click', function(e) {
+    e.preventDefault()
     var clicked = $(e.target);
     if (! clicked.parents().hasClass("language"))
         $("#languagelist").hide();
