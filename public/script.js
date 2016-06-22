@@ -67,6 +67,10 @@ $(document).ready(function(){
       var score = document.createElement("div");
       var rating = document.createElement("div");
       var rate = document.createElement("button");
+      var expand = document.createElement("span");
+      expand.className = "expand";
+      expand.title = "Theater mode";
+      expand.innerHTML ='<i class="fa fa-expand" aria-hidden="true"></i>';
       rating.className = "ratingcase";
       rate.className = "ratenow";
       rate.innerHTML = "RATE";
@@ -84,13 +88,32 @@ $(document).ready(function(){
       score.appendChild(rate);
       description.appendChild(score);
       description.appendChild(rating);
+      description.appendChild(expand);
       $(rating).hide();
       videocase.appendChild(description);
       $('#vidiv').append(videocase);
     }
   }
+$(document).on("click", ".expand", function(){
+  var thisvideoId =  this.parentNode.parentNode.firstChild.src;
+  var popup = document.createElement("div");
+  var close = document.createElement("div");
+  var videoplayerpop = document.createElement("iframe");
+  videoplayerpop.className = "theaterplayer";
+  videoplayerpop.src = thisvideoId;
+  videoplayerpop.setAttribute('allowFullScreen', '');
+  close.className = "close";
+  close.innerHTML='<i class="fa fa-times" aria-hidden="true"></i>';
+  popup.id = "popup";
+  popup.appendChild(close);
+  popup.appendChild(videoplayerpop)
+  var body = document.getElementsByTagName('body')[0];
+  body.insertBefore(popup, body.childNodes[0]);
+});
 
-  //create rating on click of .ratenow
+$(document).on("click", ".close", function(){
+  $(this).parent().remove();
+});
 
   $(document).on("click", ".ratenow", function(){
     var channelnametag = $(this).parent().parent().children(".videoautor").html();
@@ -328,4 +351,5 @@ $(document).bind('click', function(e) {
 
 var text = $(this).html();
 $(".commentary dt a span").html(text);
+
 });
