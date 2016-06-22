@@ -339,8 +339,7 @@ $.ajax({
   }
 });
 }
-$(".commentary dd ul li a").click(function(e) {
-    e.preventDefault()
+$(".commentary dd ul li a").click(function() {
     var text = $(this).html();
     $(".commentary dt a span").html(text);
     $("#commentarylist").hide();
@@ -348,18 +347,15 @@ $(".commentary dd ul li a").click(function(e) {
 
 $(document).on("click", ".commentarya", filterSelect);
 
-$(".commentary dt a").click(function(e) {
-    e.preventDefault()
+$(".commentary dt a").click(function() {
     $("#commentarylist").toggle();
 });
 
-$(".language dt a").click(function(e) {
-    e.preventDefault()
+$(".language dt a").click(function() {
     $("#languagelist").toggle();
 });
 
-$(".commentary dd ul li a").click(function(e) {
-    e.preventDefault()
+$(".commentary dd ul li a").click(function() {
     $("#selectval").hide();
     var text = $(this).html();
     var classvalue = this.lastChild.innerHTML;
@@ -368,8 +364,7 @@ $(".commentary dd ul li a").click(function(e) {
     $("#commentarylist").hide();
 });
 
-$(".language dd ul li a").click(function(e) {
-    e.preventDefault()
+$(".language dd ul li a").click(function() {
     $("#selectval2").hide();
     var text = $(this).html();
     var classvalue = this.lastChild.innerHTML;
@@ -386,7 +381,6 @@ $(document).bind('click', function(e) {
 });
 
 $(document).bind('click', function(e) {
-    e.preventDefault()
     var clicked = $(e.target);
     if (! clicked.parents().hasClass("language"))
         $("#languagelist").hide();
