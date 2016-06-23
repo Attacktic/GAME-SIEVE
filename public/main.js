@@ -8,9 +8,49 @@ var backgroundlist = ['https://c5.staticflickr.com/8/7562/16057973420_80ee953226
 'https://c3.staticflickr.com/8/7025/27270273306_108f2bf48b_h.jpg']
 
 var backgroundlistindex2 = ["images/back1.png","images/back2.png","images/back3.png","images/back4.png","images/back5.png"];
+var trending = ["The Witcher 3", "Wolfenstein: The Old Blood", "Splatoon", "Kerbal Space Program", "Rust", "Batman: Arkham Knight", "Assassin’s Creed: Unity", "Smite", "DOOM", "Project CARS", "Uncharted 4: A Thief's End", "Life Is Strange", "Tom Clancy's The Division", "Dark Souls III"];
 
 $(document).ready(function(){
   var random = backgroundlist[Math.floor(Math.random()*backgroundlist.length)];
-  console.log(random)
   $('#backgroundimg').attr( "src", random );
+
+  var trendingdiv = document.createElement("div");
+  trendingdiv.id = "trendingdiv";
+for (var i = 0; i < trending.length; i++) {
+  if (i === 0){
+    var trendingtext = document.createElement("div");
+    trendingtext.id =  "trendingtext";
+    trendingtext.innerHTML = "Trending:"
+    trendingdiv.appendChild(trendingtext);
+  }
+  var trendinggamediv = document.createElement("div");
+  trendinggamediv.innerHTML = trending[i];
+  trendinggamediv.id = trending[i];
+  trendinggamediv.className = "trendinggamediv";
+  trendingdiv.appendChild(trendinggamediv);
+  if (i < trending.length-1){
+  var separator = document.createElement("div");
+  separator.className = "separator"
+  separator.innerHTML = "&#8259;";
+  trendingdiv.appendChild(separator);
+  }
+}
+  $('#trending').append(trendingdiv);
+
+  var width = $('#trendingdiv').width();
+  var containerwidth = $('#trending').width();
+  var left = containerwidth;
+  function ticker(){
+    if (--left < -width){
+      left = containerwidth;
+    }
+    $("#trendingdiv").css("margin-left", left + "px");
+    setTimeout(ticker, 10);
+  }
+  ticker();
+
+  $(document).on("click", ".trendinggamediv", function(){
+    $('#game').val(this.id);
+    $('#submit').click();
+  });
 });

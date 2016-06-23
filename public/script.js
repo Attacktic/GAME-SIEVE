@@ -82,6 +82,9 @@ $(document).ready(function(){
      return form;
    }
 
+function createTooltip(channelId){
+
+}
 
   function createVideoCase(results){
     for (var searchdata in results){
@@ -90,12 +93,15 @@ $(document).ready(function(){
       var description = document.createElement("div");
       var videoautor = document.createElement("p");
       var channelname = results[searchdata].autor;
+      var channelId = results[searchdata].channelId;
       var score = document.createElement("div");
       var rating = document.createElement("div");
       var rate = document.createElement("button");
       var expand = document.createElement("span");
       var next = document.createElement("span");
       var prev = document.createElement("span");
+      var channelinfo = document.createElement("span");
+      channelinfo.className = "channelinfo";
       prev.className = "prev";
       prev.title = "Previous video";
       prev.innerHTML ='<i class="fa fa-step-backward" aria-hidden="true"></i>';
@@ -126,6 +132,7 @@ $(document).ready(function(){
       description.appendChild(expand);
       description.appendChild(next);
       description.appendChild(prev);
+      description.appendChild(channelinfo);
       $(rating).hide();
       videocase.appendChild(description);
       $('#vidiv').append(videocase);
@@ -268,6 +275,7 @@ var gamesearch;
     method: "GET",
     url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + gamesearch + "%20gameplay&maxResults=9&key=" + key,
     success: function(data){
+      console.log(data)
       var results = [];
       for (var result in data.items){
         if(scores[data.items[result].snippet.channelTitle] !== undefined){
@@ -280,8 +288,18 @@ var gamesearch;
           id: data.items[result].id.playlistId.replace('"',''),
           autor: data.items[result].snippet.channelTitle,
           title: data.items[result].snippet.title,
-          score: scoreValue
+          score: scoreValue,
+          channelId: data.items[result].snippet.channelId
         });
+        //
+        $.ajax({
+          method: "GET",
+          url: "https://www.googleapis.com/youtube/v3/channels?part=statistics&id="+ data.items[result].snippet.channelId +"&key=" + key,
+          success: function(data){
+            console.log(data)
+          }
+        });
+        //
       }
       createVideoCase(results);
     }
