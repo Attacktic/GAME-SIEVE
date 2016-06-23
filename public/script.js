@@ -82,10 +82,6 @@ $(document).ready(function(){
      return form;
    }
 
-function createTooltip(channelId){
-
-}
-
   function createVideoCase(results){
     for (var searchdata in results){
       var videocase = document.createElement("div");
@@ -101,6 +97,7 @@ function createTooltip(channelId){
       var next = document.createElement("span");
       var prev = document.createElement("span");
       var channelinfo = document.createElement("span");
+      channelinfo.innerHTML = '<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 178px; height: 48px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 174px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1466699223264" name="I0_1466699223264" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=' + channelId + '&amp;layout=full&amp;count=default&amp;origin=http%3A%2F%2Flocalhost%3A8000&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.Xu4oTdttB4E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPiC5JYpN0PmV_coVNlydRZvp8inQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1466699223264&amp;parent=http%3A%2F%2Flocalhost%3A8000&amp;pfname=&amp;rpctoken=14813327" data-gapiattached="true"></iframe></div>'
       channelinfo.className = "channelinfo";
       prev.className = "prev";
       prev.title = "Previous video";
@@ -114,7 +111,7 @@ function createTooltip(channelId){
       rating.className = "ratingcase";
       rate.className = "ratenow";
       rate.innerHTML = "RATE";
-      score.innerHTML = "score: " + results[searchdata].score;
+      score.innerHTML = '<i class="fa fa-star" aria-hidden="true"></i>' + " " + results[searchdata].score;
       score.className = "score";
       description.className = "description";
       videoautor.innerHTML =  '<i class="fa fa-youtube-play" aria-hidden="true"></i>' + ' ' + results[searchdata].autor;
@@ -135,6 +132,7 @@ function createTooltip(channelId){
       description.appendChild(channelinfo);
       $(rating).hide();
       videocase.appendChild(description);
+      $('.channelinfo').hide();
       $('#vidiv').append(videocase);
     }
   }
@@ -159,6 +157,18 @@ $(document).on("click", ".expand", function(e){
   body.insertBefore(popup, body.childNodes[0]);
 });
 
+$(document).on("mouseenter", ".videoautor", function(){
+  $(this).parent().children(".channelinfo").show();
+});
+
+$(document).on("mouseleave", ".channelinfo", function(){
+    $(this).hide()
+  });
+
+$("#vidiv").on("mouseenter", function(){
+  $(".channelinfo").hide();
+});
+
 $(document).on("click", ".next", function(e){
   e.preventDefault();
   this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'nextVideo' + '","args":""}', '*');
@@ -178,7 +188,6 @@ $(document).on("click", ".close", function(e){
     e.preventDefault()
     var channelnametag = $(this).parent().parent().children(".videoautor").html();
     var channelname =  channelnametag.substring(channelnametag.lastIndexOf(">")+1, channelnametag.length);
-    console.log(channelname);
   $(this).parent().parent().children(".ratingcase").append(createStarRating(channelname));
   });
 
@@ -275,7 +284,6 @@ var gamesearch;
     method: "GET",
     url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + gamesearch + "%20gameplay&maxResults=9&key=" + key,
     success: function(data){
-      console.log(data)
       var results = [];
       for (var result in data.items){
         if(scores[data.items[result].snippet.channelTitle] !== undefined){
@@ -291,15 +299,6 @@ var gamesearch;
           score: scoreValue,
           channelId: data.items[result].snippet.channelId
         });
-        //
-        $.ajax({
-          method: "GET",
-          url: "https://www.googleapis.com/youtube/v3/channels?part=statistics&id="+ data.items[result].snippet.channelId +"&key=" + key,
-          success: function(data){
-            console.log(data)
-          }
-        });
-        //
       }
       createVideoCase(results);
     }
@@ -322,10 +321,10 @@ var gamesearch;
       }
     });
     $(this).parent().parent().parent().children(".score").show();
-    if ($(this).parent().parent().parent().children(".score").text() == "score: not rated"){
-      $(this).parent().parent().parent().children(".score").text("score: " + this.value);
+    if ($(this).parent().parent().parent().children(".score").html() == '<i class="fa fa-star" aria-hidden="true"></i> not rated'){
+      $(this).parent().parent().parent().children(".score").html('<i class="fa fa-star" aria-hidden="true"></i>' + " " + this.value);
     }
-    else { $(this).parent().parent().parent().children(".score").text("score: " + (scores[formData.channel][0] + this.value)/scores[formData.channel][1]+1);}
+    else { $(this).parent().parent().parent().children(".score").html('<i class="fa fa-star" aria-hidden="true"></i>' + " " + Number(scores[formData.channel][0] + this.value)/Number(scores[formData.channel][1])+1);}
     $(this).parent().parent().remove();
   });
 
