@@ -27,7 +27,7 @@ function getCurrentTime() {
 $(document).ready(function(){
   $('#tags').hide();
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
-  var scores = {"SSoHPKC": [5,1],"RabidRetrospectGames": [4,1], "UberHaxorNova": [3.5,1], "Cryaotic": [3,1]};
+  var scores = {"SSoHPKC": [5,1,"UCVdtW2E4vwvf8yh4FY5us9A"],"RabidRetrospectGames": [4,1,"UCm4WlDrdOOSbht-NKQ0uTeg"], "UberHaxorNova": [3.5,1,"UC22TOQWJue006Lp6DB5QhDA"], "Cryaotic": [3,1,"UCu2yrDg7wROzElRGoLQH82A"], "Cryrtic": [3,1,"UCu2yrDg7wROzElRGoLQH82A"]};
 
    var queryString = location.search;
    var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
@@ -47,13 +47,28 @@ $(document).ready(function(){
      var named =  document.createElement("p");
      named.innerHTML = temparr[i];
      channelnametop.appendChild(named);
+     if (named.innerHTML !== "undefined"){
+       var subsupbox =  document.createElement("span");
+       subsupbox.className = "subsupbox"
+       var channelIdTop = scores[temparr[i]][2];
+       var subsup = document.createElement("div");
+       var arrow = document.createElement("div");
+       arrow.className = "arrow-right";
+       subsup.className = "subsup";
+       subsup.innerHTML = '<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 178px; height: 48px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 174px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1466699223264" name="I0_1466699223264" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=' + channelIdTop + '&amp;layout=full&amp;count=default&amp;origin=http%3A%2F%2Flocalhost%3A8000&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.Xu4oTdttB4E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPiC5JYpN0PmV_coVNlydRZvp8inQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1466699223264&amp;parent=http%3A%2F%2Flocalhost%3A8000&amp;pfname=&amp;rpctoken=14813327" data-gapiattached="true"></iframe></div>'
+       subsupbox.appendChild(arrow);
+       subsupbox.appendChild(subsup);
+       play.appendChild(subsupbox);
+     }
      if (named.innerHTML == "undefined"){
        named.innerHTML = "--";
+       var channelIdTop = "";
      }
      channelnametop.className = "playerId";
      play.appendChild(channelnametop);
      $('#ranked').append(play);
    }
+     $('.subsupbox').hide();
 
    $('#showtags').on("click", function(){
      $('#showtags').hide();
@@ -132,7 +147,10 @@ $(document).ready(function(){
       var next = document.createElement("span");
       var prev = document.createElement("span");
       var channelinfo = document.createElement("span");
-      channelinfo.innerHTML = '<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 178px; height: 48px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 174px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1466699223264" name="I0_1466699223264" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=' + channelId + '&amp;layout=full&amp;count=default&amp;origin=http%3A%2F%2Flocalhost%3A8000&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.Xu4oTdttB4E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPiC5JYpN0PmV_coVNlydRZvp8inQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1466699223264&amp;parent=http%3A%2F%2Flocalhost%3A8000&amp;pfname=&amp;rpctoken=14813327" data-gapiattached="true"></iframe></div>'
+      var channelinfoyt =  document.createElement("span");
+      var arrowl = document.createElement("span");
+      arrowl.className = "arrow-left";
+      channelinfoyt.innerHTML = '<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 178px; height: 48px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 174px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1466699223264" name="I0_1466699223264" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=' + channelId + '&amp;layout=full&amp;count=default&amp;origin=http%3A%2F%2Flocalhost%3A8000&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.Xu4oTdttB4E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPiC5JYpN0PmV_coVNlydRZvp8inQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1466699223264&amp;parent=http%3A%2F%2Flocalhost%3A8000&amp;pfname=&amp;rpctoken=14813327" data-gapiattached="true"></iframe></div>'
       channelinfo.className = "channelinfo";
       prev.className = "prev";
       prev.title = "Previous video";
@@ -164,6 +182,8 @@ $(document).ready(function(){
       description.appendChild(expand);
       description.appendChild(next);
       description.appendChild(prev);
+      channelinfo.appendChild(arrowl);
+      channelinfo.appendChild(channelinfoyt);
       description.appendChild(channelinfo);
       $(rating).hide();
       videocase.appendChild(description);
@@ -195,6 +215,23 @@ $(document).on("click", ".expand", function(e){
 $(document).on("mouseenter", ".videoautor", function(){
   $(this).parent().children(".channelinfo").show();
 });
+
+$(document).on("mouseenter", ".player", function(){
+  $(this).children(".subsupbox").show();
+  ($('.subsupbox').not($(this).children(".subsupbox"))).hide();
+});
+
+$(document).on("mouseleave", ".subsupbox", function(){
+    $(this).hide();
+  });
+
+  $(document).on("mouseenter", "#vidiv", function(){
+      $('.subsupbox').hide();
+    });
+
+  $(document).on("mouseenter", ".videoplayer", function(){
+      $('.channelinfo').hide();
+    });
 
 $(document).on("mouseleave", ".channelinfo", function(){
     $(this).hide()
