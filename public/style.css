@@ -212,7 +212,7 @@ main {
   font-size: 0.8em;
   width: 17vw;
   height:3vh;
-  bottom: 1vh;
+  bottom: -1.8vh;
   right: 1vw;
   color: #e6e6e6;
   text-align: center;
@@ -534,7 +534,7 @@ footer{
 }
 
 #trending{
-  left: 5%;
+  left: 8.5%;
   top: 82%;
   height: 4vh;
   position: absolute;

@@ -20,10 +20,6 @@ function onPlayerReady(e){
 
 function onPlayerStateChange(e){}
 
-function getCurrentTime() {
-  player.getCurrentTime();
-}
-
 $(document).ready(function(){
   $('#tags').hide();
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
@@ -49,13 +45,13 @@ $(document).ready(function(){
      channelnametop.appendChild(named);
      if (named.innerHTML !== "undefined"){
        var subsupbox =  document.createElement("span");
-       subsupbox.className = "subsupbox"
+       subsupbox.className = "subsupbox";
        var channelIdTop = scores[temparr[i]][2];
        var subsup = document.createElement("div");
        var arrow = document.createElement("div");
        arrow.className = "arrow-right";
        subsup.className = "subsup";
-       subsup.innerHTML = '<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 178px; height: 48px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 174px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1466699223264" name="I0_1466699223264" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=' + channelIdTop + '&amp;layout=full&amp;count=default&amp;origin=http%3A%2F%2Flocalhost%3A8000&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.Xu4oTdttB4E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPiC5JYpN0PmV_coVNlydRZvp8inQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1466699223264&amp;parent=http%3A%2F%2Flocalhost%3A8000&amp;pfname=&amp;rpctoken=14813327" data-gapiattached="true"></iframe></div>'
+       subsup.innerHTML = '<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 178px; height: 48px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 174px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1466699223264" name="I0_1466699223264" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=' + channelIdTop + '&amp;layout=full&amp;count=default&amp;origin=http%3A%2F%2Flocalhost%3A8000&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.Xu4oTdttB4E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPiC5JYpN0PmV_coVNlydRZvp8inQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1466699223264&amp;parent=http%3A%2F%2Flocalhost%3A8000&amp;pfname=&amp;rpctoken=14813327" data-gapiattached="true"></iframe></div>';
        subsupbox.appendChild(arrow);
        subsupbox.appendChild(subsup);
        play.appendChild(subsupbox);
@@ -95,8 +91,8 @@ $(document).ready(function(){
      var allinputs = document.getElementsByTagName('input');
      for(var i=0; i<allinputs.length; i++) {
        if(allinputs[i].type == 'checkbox' && allinputs[i].checked == true) {
-         checkedlist.push(allinputs[i].value)
-       };
+         checkedlist.push(allinputs[i].value);
+       }
      }
      return translator(lang, checkedlist).join('');
      //return checkedlist.join('');
@@ -150,7 +146,7 @@ $(document).ready(function(){
       var channelinfoyt =  document.createElement("span");
       var arrowl = document.createElement("span");
       arrowl.className = "arrow-left";
-      channelinfoyt.innerHTML = '<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 178px; height: 48px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 174px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1466699223264" name="I0_1466699223264" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=' + channelId + '&amp;layout=full&amp;count=default&amp;origin=http%3A%2F%2Flocalhost%3A8000&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.Xu4oTdttB4E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPiC5JYpN0PmV_coVNlydRZvp8inQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1466699223264&amp;parent=http%3A%2F%2Flocalhost%3A8000&amp;pfname=&amp;rpctoken=14813327" data-gapiattached="true"></iframe></div>'
+      channelinfoyt.innerHTML = '<div id="___ytsubscribe_0" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 178px; height: 48px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 174px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 48px;" tabindex="0" vspace="0" width="100%" id="I0_1466699223264" name="I0_1466699223264" src="https://www.youtube.com/subscribe_embed?usegapi=1&amp;channelid=' + channelId + '&amp;layout=full&amp;count=default&amp;origin=http%3A%2F%2Flocalhost%3A8000&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.Xu4oTdttB4E.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCPiC5JYpN0PmV_coVNlydRZvp8inQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1466699223264&amp;parent=http%3A%2F%2Flocalhost%3A8000&amp;pfname=&amp;rpctoken=14813327" data-gapiattached="true"></iframe></div>';
       channelinfo.className = "channelinfo";
       prev.className = "prev";
       prev.title = "Previous video";
@@ -192,10 +188,17 @@ $(document).ready(function(){
     }
   }
 $(document).on("click", ".expand", function(e){
-  e.preventDefault()
+  e.preventDefault();
   this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
-  //var currenttime2 =  this.parentNode.parentNode.firstChild.getCurrentTime();
-  //console.log(this.parentNode.parentNode.firstChild.contentWindow.getCurrentTime())
+  this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'getCurrentTime' + '","args":""}', '*');
+  //var currenttime2 = this.parentNode.parentNode.firstChild.getCurrentTime();
+  //console.log(currenttime2)
+  console.log(getCurrentTime());
+  console.log(getCurrentTime);
+  window.addEventListener('message', function(e) {
+  var message = e.data;
+  console.log(message)
+});
   var thisvideoId = this.parentNode.parentNode.firstChild.src;
   var popup = document.createElement("div");
   var close = document.createElement("div");
@@ -234,7 +237,7 @@ $(document).on("mouseleave", ".subsupbox", function(){
     });
 
 $(document).on("mouseleave", ".channelinfo", function(){
-    $(this).hide()
+    $(this).hide();
   });
 
 $("#vidiv").on("mouseenter", function(){
@@ -257,7 +260,7 @@ $(document).on("click", ".close", function(e){
 });
 
   $(document).on("click", ".ratenow", function(e){
-    e.preventDefault()
+    e.preventDefault();
     var channelnametag = $(this).parent().parent().children(".videoautor").html();
     var channelname = channelnametag.substring(channelnametag.lastIndexOf(">")+1, channelnametag.length);
   $(this).parent().parent().children(".ratingcase").append(createStarRating(channelname));
@@ -282,7 +285,7 @@ $(document).on("click", ".close", function(e){
       }
       gamebox.className = "gamebox";
       if (searchresults[game].img === ""){
-        gameimg.src = "/images/notfound.png"
+        gameimg.src = "/images/notfound.png";
       }
       else {gameimg.src = searchresults[game].img;}
       gameimg.alt = searchresults[game].name;
@@ -296,7 +299,7 @@ $(document).on("click", ".close", function(e){
     }
   }
   $(document).on("click", '.ratenow', function(e){
-    e.preventDefault()
+    e.preventDefault();
     $(this).parent().hide();
     $(this).parent().parent().children('.ratingcase').show();
     $(this).remove();
@@ -325,14 +328,13 @@ $(window).on("load", function(){
 
 function ifNotFound(){
   var notfound = document.createElement("span");
-  notfound.innerHTML = "No Results Found"
-  notfound.id = "nfound"
-  console.log(notfound)
+  notfound.innerHTML = "No Results Found";
+  notfound.id = "nfound";
   $('#vidiv').append(notfound);
 }
 
 $('#navbutton').on("click", function(e){
-  e.preventDefault()
+  e.preventDefault();
   $('#nav').hide();
   var newsearch = $('#navsearch').val();
   gamesearchquery = newsearch;
@@ -356,7 +358,7 @@ $('#navbutton').on("click", function(e){
       loadGameResults(searchresults);
       }
     else {
-      ifNotFound()
+      ifNotFound();
     }
     }
   });
@@ -364,7 +366,7 @@ $('#navbutton').on("click", function(e){
 var gamesearch;
 
   $(document).on("click", ".gameimg", function(e){
-    e.preventDefault()
+    e.preventDefault();
     $('#nav').show();
     $('#vidiv').empty();
     $('#vidiv').css("margin-top","-2vh");
@@ -414,7 +416,7 @@ var gamesearch;
       data: formData,
       method: "POST",
       success: function(data){
-        alert("sent");
+        //alert("sent");
       }
     });
     $(this).parent().parent().parent().children(".score").show();
@@ -422,7 +424,7 @@ var gamesearch;
       $(this).parent().parent().parent().children(".score").html('<i class="fa fa-star" aria-hidden="true"></i>' + " " + this.value);
     }
     else {
-      $(this).parent().parent().parent().children(".score").html('<i class="fa fa-star" aria-hidden="true"></i>' + " " + ((scores[formData.channel][0] +  Number(this.value)) / (scores[formData.channel][1]+1)))}
+      $(this).parent().parent().parent().children(".score").html('<i class="fa fa-star" aria-hidden="true"></i>' + " " + ((scores[formData.channel][0] +  Number(this.value)) / (scores[formData.channel][1]+1)));}
     $(this).parent().parent().remove();
   });
 
@@ -435,7 +437,6 @@ $.ajax({
   method: "GET",
   url: link,
   success: function(data){
-    console.log(link)
     var results = [];
     if (data.items.length === 0){
       ifNotFound();
@@ -470,7 +471,7 @@ $(document).on("click", ".tag", function(){
   if($(this).children(".check").prop('checked') === true){
     $(this).children(".check").prop('checked', false);
   }
-  else {$(this).children(".check").prop('checked', true)}
+  else {$(this).children(".check").prop('checked', true);}
   filterSelect();
 });
 
