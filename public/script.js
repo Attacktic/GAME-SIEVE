@@ -58,20 +58,15 @@ $(document).ready(function(){
      $('#tags').show();
    });
 
-   $(document).on("click", ".tag", function(){
-     if($(this).children(".check").prop('checked') === true){
-       $(this).children(".check").prop('checked', false);
+   function getSelectedChbox(){
+     var checkedlist = [];
+     var allinputs = document.getElementsByTagName('input');
+     for(var i=0; i<allinputs.length; i++) {
+       if(allinputs[i].type == 'checkbox' && allinputs[i].checked == true) {
+         checkedlist.push(allinputs[i].value)
+       };
      }
-     else {$(this).children(".check").prop('checked', true)}
-     findSelected()
-   });
-
-   function findSelected(){
-     var checked = [];
-     //console.log(.check input:checked)
-     $('.check input:checked').each(function() {
-     checked.push($(this).val());
-    });
+     return checkedlist.join('');
    }
 
    function createStarRating(channelname){
@@ -323,6 +318,9 @@ var gamesearch;
     url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + gamesearch + "%20gameplay%20-unboxing&maxResults=9&key=" + key,
     success: function(data){
       var results = [];
+      if (data.items.length === 0){
+        ifNotFound();
+      }
       for (var result in data.items){
         if(scores[data.items[result].snippet.channelTitle] !== undefined){
           results.unshift({
@@ -375,33 +373,49 @@ function filterSelect(){
   var xquery = $("#selectval").html();
   var lang = $("#selectval2").html();
   $('#vidiv').empty();
-  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + xquery + gamesearch + "%20gameplay" + lang +"&maxResults=9&key=" + key;
+  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + xquery + gamesearch + "%20gameplay" + lang + getSelectedChbox() + "&maxResults=9&key=" + key;
 $.ajax({
   method: "GET",
   url: link,
   success: function(data){
-    if (data.items.length !== 0){
     var results = [];
+    if (data.items.length === 0){
+      ifNotFound();
+    }
     for (var result in data.items){
       if(scores[data.items[result].snippet.channelTitle] !== undefined){
-      var scoreValue = scores[data.items[result].snippet.channelTitle][0];}
-      else{
-        scoreValue = "not rated";
+        results.unshift({
+          id: data.items[result].id.playlistId.replace('"',''),
+          autor: data.items[result].snippet.channelTitle,
+          title: data.items[result].snippet.title,
+          score: scores[data.items[result].snippet.channelTitle][0],
+          channelId: data.items[result].snippet.channelId
+        });
       }
-      results.push({
-        //id: data.items[result].id.videoId.replace('"',''),
-        id: data.items[result].id.playlistId.replace('"',''),
-        autor: data.items[result].snippet.channelTitle,
-        title: data.items[result].snippet.title,
-        score: scoreValue
-      });
+      else{
+        results.push({
+          id: data.items[result].id.playlistId.replace('"',''),
+          autor: data.items[result].snippet.channelTitle,
+          title: data.items[result].snippet.title,
+          score: "not rated",
+          channelId: data.items[result].snippet.channelId
+        });
+      }
     }
     createVideoCase(results);
   }
-  else {ifNotFound()}
-  }
 });
 }
+
+$(document).on("click", ".tag", function(){
+  var checkedlist = [];
+  if($(this).children(".check").prop('checked') === true){
+    $(this).children(".check").prop('checked', false);
+  }
+  else {$(this).children(".check").prop('checked', true)}
+  filterSelect();
+});
+
 $(".commentary dd ul li a").click(function() {
     var text = $(this).html();
     $(".commentary dt a span").html(text);
