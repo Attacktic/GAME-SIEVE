@@ -280,6 +280,11 @@ select{
   margin: auto;
   font-family: '04B03';
 }
+
+.lantitle, .showtitle{
+  float: left;
+  margin-right: 10px;
+}
 .player{
   position: relative;
   display: block;
