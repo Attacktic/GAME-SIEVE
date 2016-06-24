@@ -312,6 +312,7 @@ var gamesearch;
     e.preventDefault()
     $('#nav').show();
     $('#vidiv').empty();
+    $('#vidiv').css("margin-top","-2vh");
     gamesearch = $(this).attr("alt");
   $.ajax({
     method: "GET",
