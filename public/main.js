@@ -5,10 +5,10 @@ var backgroundlist = ['https://c5.staticflickr.com/8/7562/16057973420_80ee953226
 'https://c6.staticflickr.com/8/7204/14115497973_f50311de35_h.jpg',
 'https://c3.staticflickr.com/6/5755/21185132866_725eeb34a1_h.jpg',
 'https://c8.staticflickr.com/6/5711/21908602855_099ac8da56_h.jpg',
-'https://c3.staticflickr.com/8/7025/27270273306_108f2bf48b_h.jpg']
+'https://c3.staticflickr.com/8/7025/27270273306_108f2bf48b_h.jpg'];
 
 var backgroundlistindex2 = ["images/back1.png","images/back2.png","images/back3.png","images/back4.png","images/back5.png"];
-var trending = ["The Witcher 3", "Wolfenstein: The Old Blood", "Splatoon", "Kerbal Space Program", "Rust", "Batman: Arkham Knight", "Assassin’s Creed: Unity", "Smite", "DOOM", "Project CARS", "Uncharted 4: A Thief's End", "Life Is Strange", "Tom Clancy's The Division", "Dark Souls III"];
+var trending = ["Mirror's Edge Catalyst", "Fallout 4", "The Witcher 3: Wild Hunt", "Dark Souls III", "Trials of the Blood Dragon", "Overwatch","Rust", "Smite", "DOOM", "Uncharted 4: A Thief's End", "Mario Maker", "Life Is Strange", "Tom Clancy's The Division"];
 
 $(document).ready(function(){
   var random = backgroundlist[Math.floor(Math.random()*backgroundlist.length)];

@@ -36,17 +36,19 @@ $(document).ready(function(){
     $("main").css("background-image", "url(" + random + ")");
 
    var temparr = Object.keys(scores);
-   for (var i = 0; i < 5; i++) {
+   for (var i = 0; i < 5; i++){
      var play = document.createElement("div");
      play.className = "player";
-     var number =  document.createElement("div");
+     var number = document.createElement("div");
      number.className = "num";
      number.innerHTML = i+1;
      play.appendChild(number);
-     var channelnametop = document.createElement("p");
-     channelnametop.innerHTML = temparr[i];
-     if (channelnametop.innerHTML == "undefined"){
-       channelnametop.innerHTML = "--";
+     var channelnametop = document.createElement("div");
+     var named =  document.createElement("p");
+     named.innerHTML = temparr[i];
+     channelnametop.appendChild(named);
+     if (named.innerHTML == "undefined"){
+       named.innerHTML = "--";
      }
      channelnametop.className = "playerId";
      play.appendChild(channelnametop);
@@ -58,7 +60,22 @@ $(document).ready(function(){
      $('#tags').show();
    });
 
-   function getSelectedChbox(){
+   function translator(lang, checkedlist){
+     var langs = { "%20co-op":["%20campaña", "%20campanha"],"%20funny": ["%20gracioso","%20engraçado"], "%20secrets": ["%20secretos", "%20segredos"],  "%20cheats": ["%20trampas","%20fraudes"]};
+     if (lang === "%20español"){
+       checkedlist.forEach(function(ch,i){
+           checkedlist[i] = langs[ch][0];
+       });
+     }
+     else if(lang === "%20portugues"){
+       checkedlist.forEach(function(ch, i){
+           checkedlist[i] = langs[ch][1];
+       });
+     }
+     return checkedlist;
+   }
+
+   function getSelectedChbox(lang){
      var checkedlist = [];
      var allinputs = document.getElementsByTagName('input');
      for(var i=0; i<allinputs.length; i++) {
@@ -66,7 +83,8 @@ $(document).ready(function(){
          checkedlist.push(allinputs[i].value)
        };
      }
-     return checkedlist.join('');
+     return translator(lang, checkedlist).join('');
+     //return checkedlist.join('');
    }
 
    function createStarRating(channelname){
@@ -204,7 +222,7 @@ $(document).on("click", ".close", function(e){
   $(document).on("click", ".ratenow", function(e){
     e.preventDefault()
     var channelnametag = $(this).parent().parent().children(".videoautor").html();
-    var channelname =  channelnametag.substring(channelnametag.lastIndexOf(">")+1, channelnametag.length);
+    var channelname = channelnametag.substring(channelnametag.lastIndexOf(">")+1, channelnametag.length);
   $(this).parent().parent().children(".ratingcase").append(createStarRating(channelname));
   });
 
@@ -316,7 +334,7 @@ var gamesearch;
     gamesearch = $(this).attr("alt");
   $.ajax({
     method: "GET",
-    url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + gamesearch + "%20gameplay%20-unboxing&maxResults=9&key=" + key,
+    url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&order=viewCount&q=" + gamesearch + "%20gameplay%20-unboxing&maxResults=9&key=" + key,
     success: function(data){
       var results = [];
       if (data.items.length === 0){
@@ -374,11 +392,12 @@ function filterSelect(){
   var xquery = $("#selectval").html();
   var lang = $("#selectval2").html();
   $('#vidiv').empty();
-  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + xquery + gamesearch + "%20gameplay" + lang + getSelectedChbox() + "&maxResults=9&key=" + key;
+  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&order=viewCount&q=" + xquery + gamesearch + "%20gameplay" + lang + getSelectedChbox(lang) + "&maxResults=9&key=" + key;
 $.ajax({
   method: "GET",
   url: link,
   success: function(data){
+    console.log(link)
     var results = [];
     if (data.items.length === 0){
       ifNotFound();
