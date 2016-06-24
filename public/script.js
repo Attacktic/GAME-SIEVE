@@ -25,6 +25,7 @@ function getCurrentTime() {
 }
 
 $(document).ready(function(){
+  $('#tags').hide();
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
   var scores = {"SSoHPKC": [5,1],"RabidRetrospectGames": [4,1], "UberHaxorNova": [3.5,1], "Cryaotic": [3,1]};
 
@@ -50,6 +51,27 @@ $(document).ready(function(){
      channelnametop.className = "playerId";
      play.appendChild(channelnametop);
      $('#ranked').append(play);
+   }
+
+   $('#showtags').on("click", function(){
+     $('#showtags').hide();
+     $('#tags').show();
+   });
+
+   $(document).on("click", ".tag", function(){
+     if($(this).children(".check").prop('checked') === true){
+       $(this).children(".check").prop('checked', false);
+     }
+     else {$(this).children(".check").prop('checked', true)}
+     findSelected()
+   });
+
+   function findSelected(){
+     var checked = [];
+     //console.log(.check input:checked)
+     $('.check input:checked').each(function() {
+     checked.push($(this).val());
+    });
    }
 
    function createStarRating(channelname){
@@ -209,7 +231,10 @@ $(document).on("click", ".close", function(e){
         gameplatforms.innerHTML += gameplatform;
       }
       gamebox.className = "gamebox";
-      gameimg.src = searchresults[game].img;
+      if (searchresults[game].img === ""){
+        gameimg.src = "/images/notfound.png"
+      }
+      else {gameimg.src = searchresults[game].img;}
       gameimg.alt = searchresults[game].name;
       gameimg.className = "gameimg";
       gameimgdiv.appendChild(gameimg);
@@ -248,6 +273,14 @@ $(window).on("load", function(){
   });
 });
 
+function ifNotFound(){
+  var notfound = document.createElement("span");
+  notfound.innerHTML = "No Results Found"
+  notfound.id = "nfound"
+  console.log(notfound)
+  $('#vidiv').append(notfound);
+}
+
 $('#navbutton').on("click", function(e){
   e.preventDefault()
   $('#nav').hide();
@@ -261,6 +294,7 @@ $('#navbutton').on("click", function(e){
       "Accept": "application/json"
    },
     success: function(resultdata){
+      if(resultdata.length !== 0){
       var searchresults = [];
       for (var game in resultdata){
         searchresults.push({
@@ -270,6 +304,10 @@ $('#navbutton').on("click", function(e){
         });
       }
       loadGameResults(searchresults);
+      }
+    else {
+      ifNotFound()
+    }
     }
   });
 });
@@ -282,23 +320,28 @@ var gamesearch;
     gamesearch = $(this).attr("alt");
   $.ajax({
     method: "GET",
-    url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + gamesearch + "%20gameplay&maxResults=9&key=" + key,
+    url: "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&relevanceLanguage=en&order=viewCount&q=" + gamesearch + "%20gameplay%20-unboxing&maxResults=9&key=" + key,
     success: function(data){
       var results = [];
       for (var result in data.items){
         if(scores[data.items[result].snippet.channelTitle] !== undefined){
-        var scoreValue = scores[data.items[result].snippet.channelTitle][0];}
-        else{
-          scoreValue = "not rated";
+          results.unshift({
+            id: data.items[result].id.playlistId.replace('"',''),
+            autor: data.items[result].snippet.channelTitle,
+            title: data.items[result].snippet.title,
+            score: scores[data.items[result].snippet.channelTitle][0],
+            channelId: data.items[result].snippet.channelId
+          });
         }
-        results.push({
-        //  id: data.items[result].id.videoId.replace('"',''),
-          id: data.items[result].id.playlistId.replace('"',''),
-          autor: data.items[result].snippet.channelTitle,
-          title: data.items[result].snippet.title,
-          score: scoreValue,
-          channelId: data.items[result].snippet.channelId
-        });
+        else{
+          results.push({
+            id: data.items[result].id.playlistId.replace('"',''),
+            autor: data.items[result].snippet.channelTitle,
+            title: data.items[result].snippet.title,
+            score: "not rated",
+            channelId: data.items[result].snippet.channelId
+          });
+        }
       }
       createVideoCase(results);
     }
@@ -337,6 +380,7 @@ $.ajax({
   method: "GET",
   url: link,
   success: function(data){
+    if (data.items.length !== 0){
     var results = [];
     for (var result in data.items){
       if(scores[data.items[result].snippet.channelTitle] !== undefined){
@@ -353,6 +397,8 @@ $.ajax({
       });
     }
     createVideoCase(results);
+  }
+  else {ifNotFound()}
   }
 });
 }
