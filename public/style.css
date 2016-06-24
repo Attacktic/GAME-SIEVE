@@ -253,7 +253,6 @@ select{
 }
 
 #sidetitle{
-  margin: auto;
   margin-top: 10vh;
   margin-bottom: 10px;
   width: 60%;
@@ -396,7 +395,7 @@ footer{
 }
 .rating-input {
     position: absolute;
-    left: 0;
+    left: -14px;
     top: -50px;
 }
 .rating-star {
