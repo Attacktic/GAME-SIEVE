@@ -421,7 +421,8 @@ var gamesearch;
     if ($(this).parent().parent().parent().children(".score").html() == '<i class="fa fa-star" aria-hidden="true"></i> not rated'){
       $(this).parent().parent().parent().children(".score").html('<i class="fa fa-star" aria-hidden="true"></i>' + " " + this.value);
     }
-    else { $(this).parent().parent().parent().children(".score").html('<i class="fa fa-star" aria-hidden="true"></i>' + " " + Number(scores[formData.channel][0] + this.value)/Number(scores[formData.channel][1])+1);}
+    else {
+      $(this).parent().parent().parent().children(".score").html('<i class="fa fa-star" aria-hidden="true"></i>' + " " + ((scores[formData.channel][0] +  Number(this.value)) / (scores[formData.channel][1]+1)))}
     $(this).parent().parent().remove();
   });
 

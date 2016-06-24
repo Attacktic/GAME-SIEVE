@@ -476,6 +476,14 @@ footer{
   box-shadow: 5px 5px 5px black;
 }
 
+#footerinfo{
+  margin: auto;
+  font-family: 'Inconsolata';
+  color: white;
+  width: 20%;
+  margin-top: 2vh;
+}
+
 .expand{
   position: absolute;
   right: 0.2vw;
