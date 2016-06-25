@@ -284,6 +284,7 @@ select{
 .lantitle, .showtitle{
   float: left;
   margin-right: 10px;
+  margin-top: 1.5vh;
 }
 .player{
   position: relative;
