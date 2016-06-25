@@ -187,32 +187,23 @@ $(document).ready(function(){
       $('#vidiv').append(videocase);
     }
   }
-$(document).on("click", ".expand", function(e){
-  e.preventDefault();
-  this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
-  this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'getCurrentTime' + '","args":""}', '*');
-  //var currenttime2 = this.parentNode.parentNode.firstChild.getCurrentTime();
-  //console.log(currenttime2)
-  console.log(getCurrentTime());
-  console.log(getCurrentTime);
-  window.addEventListener('message', function(e) {
-  var message = e.data;
-  console.log(message)
-});
-  var thisvideoId = this.parentNode.parentNode.firstChild.src;
-  var popup = document.createElement("div");
-  var close = document.createElement("div");
-  var videoplayerpop = document.createElement("iframe");
-  videoplayerpop.className = "theaterplayer";
-  videoplayerpop.src = thisvideoId + "&start=1868&autoplay=1";
-  videoplayerpop.setAttribute('allowFullScreen', '');
-  close.className = "close";
-  close.innerHTML='<i class="fa fa-times" aria-hidden="true"></i>';
-  popup.id = "popup";
-  popup.appendChild(close);
-  popup.appendChild(videoplayerpop);
-  var body = document.getElementsByTagName('body')[0];
-  body.insertBefore(popup, body.childNodes[0]);
+  $(document).on("click", ".expand", function(e){
+    e.preventDefault()
+    this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+    var thisvideoId = this.parentNode.parentNode.firstChild.src;
+    var popup = document.createElement("div");
+    var close = document.createElement("div");
+    var videoplayerpop = document.createElement("iframe");
+    videoplayerpop.className = "theaterplayer";
+    videoplayerpop.src = thisvideoId + "&start=1868&autoplay=1";
+    videoplayerpop.setAttribute('allowFullScreen', '');
+    close.className = "close";
+    close.innerHTML='<i class="fa fa-times" aria-hidden="true"></i>';
+    popup.id = "popup";
+    popup.appendChild(close);
+    popup.appendChild(videoplayerpop);
+    var body = document.getElementsByTagName('body')[0];
+    body.insertBefore(popup, body.childNodes[0]);
 });
 
 $(document).on("mouseenter", ".videoautor", function(){

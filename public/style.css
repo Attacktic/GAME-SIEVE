@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
 @font-face { font-family: '04B03';
 src:  url('04B03.TTF')}
+@font-face { font-family: 'Extros Backstage';
+src:  url('Extros_Backstage.ttf')}
 
 body {
   margin: 0;
@@ -243,15 +245,6 @@ select{
   display: inline-block;
 }
 
-#title{
-  margin-top: 3vh;
-  width: 90%;
-  margin: auto;
-  height: 8vh;
-  background-color: black;
-  margin-bottom: 3vh;
-}
-
 #sidetitle{
   margin-top: 10vh;
   margin-bottom: 10px;
@@ -492,7 +485,21 @@ footer{
   border: none;
   cursor: pointer;
 }
+.title{
+  font-family: 'Extros Backstage';
+  position: absolute;
+  color: white;
+  z-index: 40;
+  font-size: 4em;
+  right: 9vw;
+  top: 12vh;
+  width: 25vw;
+}
 
+#titleresults{
+  left: 5vw;
+  top: 5vh;
+}
 .next{
   position: absolute;
   right: 1.7vw;
