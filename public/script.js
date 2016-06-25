@@ -129,6 +129,7 @@ $(document).ready(function(){
    }
 
   function createVideoCase(results){
+    $('#vidiv').css("height", "95%");
     for (var searchdata in results){
       var videocase = document.createElement("div");
       var mediacase =  document.createElement("iframe");
@@ -258,8 +259,10 @@ $(document).on("click", ".close", function(e){
   });
 
   function loadGameResults(searchresults){
-    $('#loading').hide();
+    $('#loading').show();
+    var count = 0;
     for (var game in searchresults){
+      count += 1;
       var gamebox = document.createElement("div");
       var gameimg = document.createElement("img");
       var gameimgdiv = document.createElement("div");
@@ -286,7 +289,12 @@ $(document).on("click", ".close", function(e){
       gamebox.appendChild(gameimgdiv);
       gamebox.appendChild(gamename);
       gamebox.appendChild(gameplatforms);
+      $('#loading').hide();
       $('#vidiv').append(gamebox);
+    }
+    if (Math.ceil(count/5) !== 1){
+      var vidivh = 50 + Math.ceil(count/5)*26 + "vh";
+      $('#vidiv').css("height", vidivh);
     }
   }
   $(document).on("click", '.ratenow', function(e){

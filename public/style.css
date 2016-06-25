@@ -81,7 +81,7 @@ main {
 #vidiv {
   display: inline-block;
   width: 86%;
-  height: 95%;
+  height: 50vh;
   background-color: rgba(0,0,0,0.8);
   float: left;
   padding: 4vw;
@@ -202,7 +202,7 @@ main {
 .gamebox{
   width: 12vw;
   float: left;
-  height: 33vh;
+  height: 36vh;
   background-color: white;
   text-align: center;
   margin: 0;
@@ -210,13 +210,18 @@ main {
   line-height: 1;
   margin-bottom: 2vh;
   font-family: 'Inconsolata';
+  position: relative;
   border-top: 12px solid white;
 }
 
 .gameplatforms{
+  text-align: center;
   display: block;
   font-size: 0.6em;
   margin-top: 10px;
+  position: absolute;
+  width: 100%;
+  bottom: 2vh;
 }
 
 #credits{
