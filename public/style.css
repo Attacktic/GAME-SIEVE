@@ -532,13 +532,16 @@ padding-top: 0.3vh;
 .title{
   font-family: 'Extros Backstage';
   position: absolute;
-  color: white;
-  text-shadow: -1px -1px 4px rgba(0, 0, 0, 0.47);
   z-index: 40;
   font-size: 4em;
   right: 9.5vw;
   top: 12vh;
   width: 25vw;
+}
+
+.title a, .title a:hover{
+  color: white;
+  text-shadow: -1px -1px 4px rgba(0, 0, 0, 0.47);
 }
 
 #titleresults{
