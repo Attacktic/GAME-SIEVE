@@ -380,6 +380,8 @@ function ifNotFound(){
 
 $('#navbutton').on("click", function(e){
   e.preventDefault();
+  $('#tags').hide();
+  $('#showtags').show();
   $('#nav').hide();
   $('input[type=checkbox]').attr('checked',false);
   var newsearch = $('#navsearch').val();
