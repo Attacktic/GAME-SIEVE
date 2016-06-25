@@ -240,10 +240,14 @@ select{
 
 #comm, #lan {
   font-size: 0.6em;
-  width: 22vw;
+  width: 18vw;
   height: 7vh;
   display: inline-block;
   float: left;
+}
+
+#lan {
+  width: 22vw;
 }
 
 #comm p, #lan p{
@@ -284,7 +288,7 @@ select{
 .lantitle, .showtitle{
   float: left;
   margin-right: 10px;
-  margin-top: 1.5vh;
+  margin-top: 1vh;
 }
 .player{
   position: relative;
@@ -437,8 +441,9 @@ footer{
   background-color: white;
   display: block;
   padding-right: 2vw;
-  width: 13vw;
+  width: 12vw;
   height: 5vh;
+  padding-top: 0.3vh;
 }
 .commentary dt a span, .language dt a span{
   cursor: pointer;
@@ -455,17 +460,23 @@ footer{
   left: 0px;
   top: 2px;
   width: auto;
-  min-width: 13vw;
+  min-width: 12vw;
 }
+
 .commentary span.value, .language span.value{
   display: none;
 }
 #commentarylist li a, #languagelist li a{
   padding: 5px;
-  width: 13vw;
+  width: 12vw;
   height: 5vh;
   border-bottom: 1px solid black;
   display: block;
+  padding-top: 1.4vh;
+}
+
+#commentarylist li a{
+padding-top: 0.3vh;
 }
 
 #popup {
@@ -510,7 +521,7 @@ footer{
 
 #titleresults{
   left: 5vw;
-  top: 5vh;
+  top: 3.5vh;
 }
 .next{
   position: absolute;

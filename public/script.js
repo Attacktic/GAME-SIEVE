@@ -23,7 +23,7 @@ function onPlayerStateChange(e){}
 $(document).ready(function(){
   $('#tags').hide();
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
-  var scores = {"SSoHPKC": [5,1,"UCVdtW2E4vwvf8yh4FY5us9A"],"RabidRetrospectGames": [4,1,"UCm4WlDrdOOSbht-NKQ0uTeg"], "UberHaxorNova": [3.5,1,"UC22TOQWJue006Lp6DB5QhDA"], "Cryaotic": [3,1,"UCu2yrDg7wROzElRGoLQH82A"], "Cryrtic": [3,1,"UCu2yrDg7wROzElRGoLQH82A"]};
+  var scores = {"SSoHPKC": [5,1,"UCVdtW2E4vwvf8yh4FY5us9A"],"RabidRetrospectGames": [4,1,"UCm4WlDrdOOSbht-NKQ0uTeg"], "UberHaxorNova": [3.5,1,"UC22TOQWJue006Lp6DB5QhDA"], "Cryaotic": [3,1,"UCu2yrDg7wROzElRGoLQH82A"], "theRadBrad": [3,1,"UCpqXJOEqGS-TCnazcHCo0rA"]};
 
    var queryString = location.search;
    var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
