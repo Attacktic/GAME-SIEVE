@@ -644,6 +644,17 @@ padding-top: 0.3vh;
   cursor: pointer;
 }
 
+#closetags{
+  float: right;
+  border: none;
+  text-align: center;
+  height: 2vh;
+  width: 1vw;
+  color: white;
+  font-family: "04B03";
+  font-size: 1em;
+  cursor: pointer;
+}
 #tags, #showtags{
   display: inline-block;
   width: 36vw;

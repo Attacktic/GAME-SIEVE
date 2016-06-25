@@ -71,6 +71,11 @@ $(document).ready(function(){
      $('#tags').show();
    });
 
+   $('#closetags').on("click", function(){
+     $('#tags').hide();
+     $('#showtags').show();
+   });
+
    function translator(lang, checkedlist){
      var langs = { "%20co-op":["%20campaña|co-op", "%20campanha|co-op"],"%20funny": ["%20gracioso","%20engraçado|funny"], "%20secrets": ["%20secretos", "%20segredos"], "%20fails": ["%20fails", "%20fails"],  "%20cheats": ["%20trampas|cheats","%20fraudes|cheats"], "%20online": ["%20online","%20online"]};
      if (lang === "%20español"){
