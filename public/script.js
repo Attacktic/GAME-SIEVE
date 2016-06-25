@@ -72,9 +72,10 @@ $(document).ready(function(){
    });
 
    function translator(lang, checkedlist){
-     var langs = { "%20co-op":["%20campaña|co-op", "%20campanha|co-op"],"%20funny": ["%20gracioso","%20engraçado|funny"], "%20secrets": ["%20secretos", "%20segredos"],  "%20cheats": ["%20trampas|cheats","%20fraudes|cheats"]};
+     var langs = { "%20co-op":["%20campaña|co-op", "%20campanha|co-op"],"%20funny": ["%20gracioso","%20engraçado|funny"], "%20secrets": ["%20secretos", "%20segredos"], "%20fails": ["%20fails", "%20fails"],  "%20cheats": ["%20trampas|cheats","%20fraudes|cheats"], "%20online": ["%20online","%20online"]};
      if (lang === "%20español"){
        checkedlist.forEach(function(ch,i){
+          console.log(ch)
            checkedlist[i] = langs[ch][0];
        });
      }
@@ -289,10 +290,13 @@ $(document).on("click", ".close", function(e){
       gamebox.appendChild(gameimgdiv);
       gamebox.appendChild(gamename);
       gamebox.appendChild(gameplatforms);
-      $('#loading').hide();
       $('#vidiv').append(gamebox);
     }
-    if (Math.ceil(count/5) !== 1){
+    $('#loading').hide();
+    if (Math.ceil(count/5) === 1){
+      $('#vidiv').css("height", "50vh");
+    }
+    else{
       var vidivh = 50 + Math.ceil(count/5)*26 + "vh";
       $('#vidiv').css("height", vidivh);
     }
@@ -430,12 +434,18 @@ var gamesearch;
 function filterSelect(){
   var xquery = $("#selectval").html();
   var lang = $("#selectval2").html();
+  var gameplay = "%20gameplay";
   $('#vidiv').empty();
-  var link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&order=viewCount&q=" + xquery + gamesearch + "%20gameplay" + lang + getSelectedChbox(lang) + "&maxResults=9&key=" + key;
+  var link;
+  if (getSelectedChbox(lang).length === 0){
+    link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&order=viewCount&q=" + xquery + gamesearch + gameplay + lang + getSelectedChbox(lang) + "&maxResults=9&key=" + key;
+  }
+  else { link = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=playlist&order=viewCount&q=" + xquery + gamesearch + lang + getSelectedChbox(lang) + "&maxResults=9&key=" + key;}
 $.ajax({
   method: "GET",
   url: link,
   success: function(data){
+    console.log(link)
     var results = [];
     if (data.items.length === 0){
       ifNotFound();

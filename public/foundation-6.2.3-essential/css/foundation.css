@@ -525,7 +525,7 @@ h6 {
     font-size: 1rem; } }
 
 a {
-  color: #2199e8;
+  color: rgba(42,17,186,1);
   text-decoration: none;
   line-height: inherit;
   cursor: pointer; }
@@ -1677,7 +1677,7 @@ select {
   padding: 0.85em 1em;
   margin: 0 0 1rem 0;
   font-size: 0.9rem;
-  background-color: #2199e8;
+  background-color: rgba(42,17,186,1);
   color: #fefefe; }
   [data-whatinput='mouse'] .button {
     outline: 0; }

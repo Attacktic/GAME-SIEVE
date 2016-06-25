@@ -10,6 +10,14 @@ body {
   font-family: '8BITWONDERNominal';
 }
 
+a{
+  color: rgba(42,17,186,1);
+}
+
+a:hover{
+  color: rgba(31, 24, 140, 1);
+}
+
 #nav{
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
@@ -625,6 +633,7 @@ padding-top: 0.3vh;
   right: 0;
   padding: 3px;
   background-color: white;
+  border-radius: 1px;
 }
 
 .channelinfoyt{
@@ -675,5 +684,5 @@ input[type=checkbox]:before {
  }
 input[type=checkbox]:checked:before {
   border: none;
-  background: #2199E8;
+  background: rgba(42,17,186,1);
   }​
