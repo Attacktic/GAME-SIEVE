@@ -76,6 +76,38 @@ $(document).ready(function(){
      $('#showtags').show();
    });
 
+   $('#goback').on("click", function(){
+     $('#nav').hide();
+     $('#vidiv').empty();
+     $('#vidiv').css("margin-top", "8vh");
+     var link;
+     if ($('#navsearch').val().length === 0){
+       link = "https://videogamesrating.p.mashape.com/get.php?count=20&game=" + gamesearchquery;
+     }
+     else {
+       var newsearch = $('#navsearch').val();
+       link = "https://videogamesrating.p.mashape.com/get.php?count=20&game=" + newsearch;
+     }
+     $.ajax({
+       url: link,
+       headers: {
+         'X-Mashape-Key': 'B7yQCdljWYmshGmHE31bczbw9O58p1qDbyXjsncphjvoxN87Pt',
+         "Accept": "application/json"
+      },
+       success: function(resultdata){
+         var searchresults = [];
+         for (var game in resultdata){
+           searchresults.push({
+             name: resultdata[game].title,
+             img: resultdata[game].thumb,
+             platforms: resultdata[game].platforms
+           });
+         }
+         loadGameResults(searchresults);
+       }
+     });
+   });
+
    function translator(lang, checkedlist){
      var langs = { "%20co-op":["%20campaña|co-op", "%20campanha|co-op"],"%20funny": ["%20gracioso","%20engraçado|funny"], "%20secrets": ["%20secretos", "%20segredos"], "%20fails": ["%20fails", "%20fails"],  "%20cheats": ["%20trampas|cheats","%20fraudes|cheats"], "%20online": ["%20online","%20online"]};
      if (lang === "%20español"){
@@ -136,6 +168,7 @@ $(document).ready(function(){
 
   function createVideoCase(results){
     $('#vidiv').css("height", "95%");
+    $('main').css("height", "160vh");
     for (var searchdata in results){
       var videocase = document.createElement("div");
       var mediacase =  document.createElement("iframe");
@@ -300,10 +333,14 @@ $(document).on("click", ".close", function(e){
     $('#loading').hide();
     if (Math.ceil(count/5) === 1){
       $('#vidiv').css("height", "50vh");
+      $('main').css("height","90vh");
     }
     else{
-      var vidivh = 50 + Math.ceil(count/5)*26 + "vh";
-      $('#vidiv').css("height", vidivh);
+      var vidivh = 50 + Math.ceil(count/5)*30;
+      $('#vidiv').css("height", vidivh  + "vh");
+      var vidiv30 = vidivh + 30 + "vh";
+      console.log(vidiv30)
+      $('main').css("height",vidiv30);
     }
   }
   $(document).on("click", '.ratenow', function(e){
@@ -344,9 +381,11 @@ function ifNotFound(){
 $('#navbutton').on("click", function(e){
   e.preventDefault();
   $('#nav').hide();
+  $('input[type=checkbox]').attr('checked',false);
   var newsearch = $('#navsearch').val();
   gamesearchquery = newsearch;
   $('#vidiv').empty();
+  $('#vidiv').css("margin-top", "8vh");
   $.ajax({
     url: "https://videogamesrating.p.mashape.com/get.php?count=20&game=" + gamesearchquery,
     headers: {
