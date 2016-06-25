@@ -72,7 +72,7 @@ $(document).ready(function(){
    });
 
    function translator(lang, checkedlist){
-     var langs = { "%20co-op":["%20campaña", "%20campanha"],"%20funny": ["%20gracioso","%20engraçado"], "%20secrets": ["%20secretos", "%20segredos"],  "%20cheats": ["%20trampas","%20fraudes"]};
+     var langs = { "%20co-op":["%20campaña|co-op", "%20campanha|co-op"],"%20funny": ["%20gracioso","%20engraçado|funny"], "%20secrets": ["%20secretos", "%20segredos"],  "%20cheats": ["%20trampas|cheats","%20fraudes|cheats"]};
      if (lang === "%20español"){
        checkedlist.forEach(function(ch,i){
            checkedlist[i] = langs[ch][0];
@@ -195,7 +195,7 @@ $(document).ready(function(){
     var close = document.createElement("div");
     var videoplayerpop = document.createElement("iframe");
     videoplayerpop.className = "theaterplayer";
-    videoplayerpop.src = thisvideoId + "&start=1868&autoplay=1";
+    videoplayerpop.src = thisvideoId + "&start=0&autoplay=1";
     videoplayerpop.setAttribute('allowFullScreen', '');
     close.className = "close";
     close.innerHTML='<i class="fa fa-times" aria-hidden="true"></i>';
