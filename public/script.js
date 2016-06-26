@@ -3,23 +3,6 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var player;
-
-function onYoutubeIframeAPIReady(){
-  player = new YT.Player("videoplayer", {
-    events: {
-      'onReady' : onPlayerReady,
-      'onStateChange' : onPlayerStateChange
-    }
-  });
-}
-
-function onPlayerReady(e){
-  e.target.playVideo();
-}
-
-function onPlayerStateChange(e){}
-
 $(document).ready(function(){
   $('#tags').hide();
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
