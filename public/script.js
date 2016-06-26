@@ -112,7 +112,6 @@ $(document).ready(function(){
      var langs = { "%20co-op":["%20campaña|co-op", "%20campanha|co-op"],"%20funny": ["%20gracioso","%20engraçado|funny"], "%20secrets": ["%20secretos", "%20segredos"], "%20fails": ["%20fails", "%20fails"],  "%20cheats": ["%20trampas|cheats","%20fraudes|cheats"], "%20online": ["%20online","%20online"]};
      if (lang === "%20español"){
        checkedlist.forEach(function(ch,i){
-          console.log(ch)
            checkedlist[i] = langs[ch][0];
        });
      }
@@ -339,7 +338,6 @@ $(document).on("click", ".close", function(e){
       var vidivh = 50 + Math.ceil(count/5)*30;
       $('#vidiv').css("height", vidivh  + "vh");
       var vidiv30 = vidivh + 30 + "vh";
-      console.log(vidiv30)
       $('main').css("height",vidiv30);
     }
   }
@@ -491,7 +489,6 @@ $.ajax({
   method: "GET",
   url: link,
   success: function(data){
-    console.log(link)
     var results = [];
     if (data.items.length === 0){
       ifNotFound();

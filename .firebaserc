@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "api-test-1342"
+    "default": "api-test-1342",
+    "gamesieve": "gameplaysieve"
   }
 }
