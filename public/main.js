@@ -7,7 +7,7 @@ var backgroundlist = ['https://c5.staticflickr.com/8/7562/16057973420_80ee953226
 'https://c8.staticflickr.com/6/5711/21908602855_099ac8da56_h.jpg',
 'https://c3.staticflickr.com/8/7025/27270273306_108f2bf48b_h.jpg'];
 
-var backgroundlistindex2 = ["images/back1.png","images/back2.png","images/back3.png","images/back4.png", "images/back5.png"];
+var backgroundlistindex2 = ["images/back1.png","images/back2.png","images/back3.png","images/back4.png"];
 var trending = ["Fallout 4", "The Witcher 3: Wild Hunt", "Mirror's Edge Catalyst", "Dark Souls III", "Trials of the Blood Dragon", "Overwatch","Rust", "Smite", "DOOM", "Uncharted 4: A Thief's End", "Super Mario Maker", "Life Is Strange", "Tom Clancy's The Division"];
 
 $(document).ready(function(){
