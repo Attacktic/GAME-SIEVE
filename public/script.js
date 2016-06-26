@@ -24,9 +24,11 @@ $(document).ready(function(){
   $('#tags').hide();
   var key = "AIzaSyANqby7sShLVr5kPjqejVdaos9m-A00yzM";
   var scores = {"SSoHPKC": [5,1,"UCVdtW2E4vwvf8yh4FY5us9A"],"RabidRetrospectGames": [4,1,"UCm4WlDrdOOSbht-NKQ0uTeg"], "UberHaxorNova": [3.5,1,"UC22TOQWJue006Lp6DB5QhDA"], "Cryaotic": [3,1,"UCu2yrDg7wROzElRGoLQH82A"], "theRadBrad": [3,1,"UCpqXJOEqGS-TCnazcHCo0rA"]};
-
-   var queryString = location.search;
-   var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
+  var queryString = location.search;
+  var gamesearchquery = queryString.substring(queryString.indexOf("=")+1, queryString.indexOf("&"));
+  if (gamesearchquery.length === 0){
+     gamesearchquery = trending[Math.floor(Math.random()*trending.length)];
+   }
    $('#nav').hide();
     var random = backgroundlistindex2[Math.floor(Math.random()*backgroundlistindex2.length)];
     $("main").css("background-image", "url(" + random + ")");
@@ -66,12 +68,14 @@ $(document).ready(function(){
    }
      $('.subsupbox').hide();
 
-   $('#showtags').on("click", function(){
+   $('#showtags').on("click", function(e){
+     e.preventDefault();
      $('#showtags').hide();
      $('#tags').show();
    });
 
-   $('#closetags').on("click", function(){
+   $('#closetags').on("click", function(e){
+     e.preventDefault();
      $('#tags').hide();
      $('#showtags').show();
    });
@@ -127,7 +131,7 @@ $(document).ready(function(){
      var checkedlist = [];
      var allinputs = document.getElementsByTagName('input');
      for(var i=0; i<allinputs.length; i++) {
-       if(allinputs[i].type == 'checkbox' && allinputs[i].checked == true) {
+       if(allinputs[i].type == 'checkbox' && allinputs[i].checked === true) {
          checkedlist.push(allinputs[i].value);
        }
      }
@@ -227,7 +231,7 @@ $(document).ready(function(){
     }
   }
   $(document).on("click", ".expand", function(e){
-    e.preventDefault()
+    e.preventDefault();
     this.parentNode.parentNode.firstChild.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
     var thisvideoId = this.parentNode.parentNode.firstChild.src;
     var popup = document.createElement("div");
@@ -309,10 +313,11 @@ $(document).on("click", ".close", function(e){
       var gameplatforms = document.createElement("div");
       gameplatforms.className = "gameplatforms";
       for (var num in searchresults[game].platforms) {
+        var gameplatform;
         if (num !== "1"){
-        var gameplatform = " / " + searchresults[game].platforms[num];
+        gameplatform = " / " + searchresults[game].platforms[num];
         }
-        else { var gameplatform = searchresults[game].platforms[num]; }
+        else { gameplatform = searchresults[game].platforms[num]; }
         gameplatforms.innerHTML += gameplatform;
       }
       gamebox.className = "gamebox";
@@ -518,7 +523,8 @@ $.ajax({
 });
 }
 
-$(document).on("click", ".tag", function(){
+$(document).on("click", ".tag", function(e){
+  e.preventDefault();
   var checkedlist = [];
   if($(this).children(".check").prop('checked') === true){
     $(this).children(".check").prop('checked', false);
@@ -527,7 +533,8 @@ $(document).on("click", ".tag", function(){
   filterSelect();
 });
 
-$(".commentary dd ul li a").click(function() {
+$(".commentary dd ul li a").click(function(e) {
+    e.preventDefault();
     var text = $(this).html();
     $(".commentary dt a span").html(text);
     $("#commentarylist").hide();
@@ -535,15 +542,18 @@ $(".commentary dd ul li a").click(function() {
 
 $(document).on("click", ".commentarya", filterSelect);
 
-$(".commentary dt a").click(function() {
+$(".commentary dt a").click(function(e) {
+    e.preventDefault();
     $("#commentarylist").toggle();
 });
 
-$(".language dt a").click(function() {
+$(".language dt a").click(function(e) {
+    e.preventDefault();
     $("#languagelist").toggle();
 });
 
-$(".commentary dd ul li a").click(function() {
+$(".commentary dd ul li a").click(function(e) {
+    e.preventDefault();
     $("#selectval").hide();
     var text = $(this).html();
     var classvalue = this.lastChild.innerHTML;
@@ -552,7 +562,8 @@ $(".commentary dd ul li a").click(function() {
     $("#commentarylist").hide();
 });
 
-$(".language dd ul li a").click(function() {
+$(".language dd ul li a").click(function(e) {
+    e.preventDefault();
     $("#selectval2").hide();
     var text = $(this).html();
     var classvalue = this.lastChild.innerHTML;

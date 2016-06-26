@@ -20,7 +20,7 @@ for (var i = 0; i < trending.length; i++) {
   if (i === 0){
     var trendingtext = document.createElement("div");
     trendingtext.id =  "trendingtext";
-    trendingtext.innerHTML = "Trending:"
+    trendingtext.innerHTML = "Trending:";
     trendingdiv.appendChild(trendingtext);
   }
   var trendinggamediv = document.createElement("div");
@@ -30,7 +30,7 @@ for (var i = 0; i < trending.length; i++) {
   trendingdiv.appendChild(trendinggamediv);
   if (i < trending.length-1){
   var separator = document.createElement("div");
-  separator.className = "separator"
+  separator.className = "separator";
   separator.innerHTML = "&#8259;";
   trendingdiv.appendChild(separator);
   }
