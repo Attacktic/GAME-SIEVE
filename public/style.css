@@ -411,7 +411,7 @@ footer{
   height: 80%;
   border: 1px solid white;
   display: inline-block;
-  font-size: 0.4em;
+  font-size: 0.6em;
   font-family: "04B03";
 }
 
@@ -647,7 +647,7 @@ padding-top: 0.3vh;
 }
 
 #trendingdiv{
-  width: 280%;
+  width: 300%;
   height: 100%;
 }
 
@@ -720,11 +720,11 @@ padding-top: 0.3vh;
   padding: 1px;
   color: black;
   font-family: "04B03";
-  font-size: 0.5em;
-  width: 4vw;
+  font-size: 0.8em;
+  width: 4.2vw;
   margin-left: 1vw;
   margin-bottom: 1vh;
-  height: 34%;
+  height: 38%;
   float: left;
   background-color: white;
   cursor: pointer;
