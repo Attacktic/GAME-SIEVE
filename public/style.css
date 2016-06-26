@@ -43,7 +43,7 @@ nav{
   padding-right: 2%;
   color: white;
   text-shadow: 0 0 1px rgba(255,255,255,0.2);
-  padding-top: 2vh;
+  padding-top: 1.8vh;
   box-shadow: 0px 14px 17px -5px rgba(0,0,0,0.71);
   position: relative;
   z-index: 3;
@@ -77,6 +77,7 @@ main {
   padding-right: 0;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 
 #front{
@@ -238,7 +239,7 @@ main {
   font-size: 0.8em;
   width: 17vw;
   height:3vh;
-  bottom: -1.8vh;
+  bottom: -3vh;
   right: 1vw;
   color: #e6e6e6;
   text-align: center;
@@ -292,7 +293,6 @@ select{
   text-shadow: 0 0 1px rgba(255,255,255,0.2);
   font-family: '04B03';
   margin-left: 6.5px;
-  font-weight: bold;
   margin-top: -8px;
 }
 
@@ -717,10 +717,9 @@ padding-top: 0.3vh;
 .tag{
   display: inline-block;
   border-radius: 2px;
-  padding: 1px;
+  font-size: 0.6em;
   color: black;
   font-family: "04B03";
-  font-size: 0.8em;
   width: 4.2vw;
   margin-left: 1vw;
   margin-bottom: 1vh;
