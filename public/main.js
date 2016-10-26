@@ -8,7 +8,7 @@ var backgroundlist = ['https://c5.staticflickr.com/8/7562/16057973420_80ee953226
 'https://c3.staticflickr.com/8/7025/27270273306_108f2bf48b_h.jpg'];
 
 var backgroundlistindex2 = ["images/back1.png","images/back2.png","images/back3.png","images/back4.png"];
-var trending = ["Fallout 4", "The Witcher 3: Wild Hunt", "Mirror's Edge Catalyst", "Dark Souls III", "Trials of the Blood Dragon", "Overwatch","Rust", "Smite", "DOOM", "Uncharted 4: A Thief's End", "Super Mario Maker", "Life Is Strange", "Tom Clancy's The Division"];
+var trending = ["Mafia 3", "Deus Ex: Mankind Divided", "Gears of War 4", "Battlefield 1", "Titanfall 2", "Batman: Return to Arkham","Civilization VI", "Thumper", "XCOM 2", "Forza Horizon 3", "Super Mario Maker", "World of Final Fantasy", "The Elder Scrolls V"];
 
 $(document).ready(function(){
   var random = backgroundlist[Math.floor(Math.random()*backgroundlist.length)];
